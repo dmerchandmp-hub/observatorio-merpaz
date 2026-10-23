@@ -1,0 +1,651 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#060b12">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Observatorio">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" href="icon-192.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}
+#appbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;gap:10px;align-items:center;padding:8px max(16px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px));background:#0b1622;border-top:1px solid #15405a;font:600 11px "JetBrains Mono",ui-monospace,monospace;letter-spacing:.08em;color:#7fa3b5;text-transform:uppercase}
+#appbar button{all:unset;cursor:pointer;color:#060b12;background:#22d3ee;padding:5px 10px}</style>
+</head><body><title>Observatorio de Inversión MERPAZ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: consola HUD oscura al estilo MERPAZ ALFA; anillo con sello MP, indicadores en paneles de esquina recortada y cuatro pestañas. Tema único oscuro, deliberado. */
+:root{
+  --paper:#060b12; --ink:#d6eef7; --muted:#7fa3b5; --rule:#15405a; --soft:#0b1622;
+  --accent:#22d3ee; --up:#34d399; --down:#f4506e; --warn:#f5a524;
+  --display:"Chakra Petch","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+#plazos svg{max-width:720px;display:block}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  background-image:radial-gradient(circle at 50% -20%,rgba(34,211,238,.12),transparent 60%),linear-gradient(rgba(34,211,238,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.04) 1px,transparent 1px);background-size:auto,32px 32px,32px 32px;background-attachment:fixed;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:24px}
+.ring{width:112px;height:112px;flex:none;position:relative}
+.ring svg{width:100%;height:100%}
+.ring .spin{transform-origin:56px 56px;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.ring .spin{animation:none}}
+.ring b{position:absolute;inset:0;display:grid;place-items:center}
+.ring b span{font:700 22px var(--display);letter-spacing:.04em;color:var(--accent);border:2px solid var(--accent);padding:2px 7px;line-height:1.1}
+.seal{width:64px;height:64px;border:3px solid var(--ink);display:grid;place-items:center;flex:none}
+.seal span{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:-1px;line-height:1}
+.brand{flex:1;min-width:220px}
+.eyebrow{font:600 11px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+h1{font:700 clamp(26px,5vw,38px)/1.1 var(--display);margin:6px 0 4px;text-wrap:balance;letter-spacing:.02em}
+.stamp{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right;border:1px solid var(--rule);background:var(--soft);padding:8px 12px}
+.stamp b{color:var(--accent);font-weight:600}
+nav{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--rule)}
+nav button{font:600 13px var(--display);letter-spacing:.1em;text-transform:uppercase;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:10px 14px;cursor:pointer}
+nav button:hover{color:var(--ink)}
+nav button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav button:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h2{font:600 20px var(--display);letter-spacing:.06em;margin:0;text-wrap:balance}
+h3{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;margin:0;color:var(--muted)}
+p{margin:0;max-width:72ch}
+.lede{color:var(--muted);max-width:80ch}
+section.view{display:flex;flex-direction:column;gap:26px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.pos{color:var(--up)} .neg{color:var(--down)} .flat{color:var(--muted)}
+.pill{display:inline-block;font:600 11px var(--mono);letter-spacing:.06em;padding:2px 8px;border:1px solid currentColor;white-space:nowrap}
+.pill.ok{color:var(--up)} .pill.wa{color:var(--warn)} .pill.cr{color:var(--down)} .pill.ne{color:var(--muted)}
+/* resumen */
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.summary>div{padding:12px 14px;border:1px solid var(--rule);background:var(--soft);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);display:flex;flex-direction:column;gap:4px;min-width:0}
+.summary .lbl{font:500 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.summary .val{font:600 26px var(--display);font-variant-numeric:tabular-nums;color:var(--accent)}
+.summary .chg{font-family:var(--mono);font-size:13px}
+.read{border-left:2px solid var(--accent);background:linear-gradient(90deg,rgba(34,211,238,.06),transparent);padding-right:12px;padding:4px 0 4px 16px;display:flex;flex-direction:column;gap:8px}
+.read p{max-width:90ch}
+/* tablas */
+.tbl{overflow-x:auto;border:1px solid var(--rule);background:var(--soft)}
+table{border-collapse:collapse;width:100%;min-width:720px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:middle}
+th{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+td.r,th.r{text-align:right}
+tr.grp td{background:rgba(34,211,238,.06);color:var(--accent)!important;font-family:var(--mono);font-weight:600;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td small{color:var(--muted);display:block;font-size:12px}
+svg.spark{display:block}
+/* gráficos */
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px}
+.chart{display:flex;flex-direction:column;gap:6px;min-width:0}
+.chart .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.chart .hd strong{font-weight:600}
+.chart svg{width:100%;height:auto;max-width:100%}
+.note{font-size:12.5px;color:var(--muted)}
+/* perfiles */
+.profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.prof{border:1px solid var(--rule);background:var(--soft);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.prof.sel{border-color:var(--accent);box-shadow:inset 0 2px 0 var(--accent),0 0 24px rgba(34,211,238,.12)}
+.prof .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.prof h2{font-size:22px}
+.alloc{display:flex;flex-direction:column;gap:7px}
+.alloc .row{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:10px;align-items:center;font-size:13.5px}
+.bar{height:6px;background:var(--paper);border:1px solid var(--rule);margin-top:3px}
+.bar i{display:block;height:100%;background:var(--accent)}
+.kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:13.5px;border-top:1px solid var(--rule);padding-top:10px}
+.kv span:nth-child(even){font-family:var(--mono);text-align:right}
+.controls{display:flex;flex-wrap:wrap;gap:18px;align-items:center;padding:14px 16px;background:var(--soft);border:1px solid var(--rule)}
+.controls label{font-size:13px;font-weight:500;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+input[type=range]{accent-color:var(--accent);width:180px;max-width:100%}
+.seg{display:inline-flex;border:1px solid var(--accent)}
+.seg button{font:600 12px var(--display);letter-spacing:.08em;text-transform:uppercase;background:none;border:0;padding:6px 12px;cursor:pointer;color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+/* alerta de inversión */
+.alerta{border:1px solid var(--warn);background:linear-gradient(90deg,rgba(245,165,36,.12),transparent);padding:14px 18px;display:flex;flex-direction:column;gap:8px}
+.alerta .tit{font:700 14px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--warn)}
+.alerta.fuerte{border-color:var(--up);background:linear-gradient(90deg,rgba(52,211,153,.12),transparent)}.alerta.fuerte .tit{color:var(--up)}
+.alerta ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.alerta li{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.alerta li b.k{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;min-width:120px}
+/* simulador y recomendaciones */
+.simres{border:1px solid var(--accent);background:linear-gradient(90deg,rgba(34,211,238,.08),transparent);padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 24px rgba(34,211,238,.08)}
+.simres .lead{font-size:15px;max-width:none}
+.simres .lead b{color:var(--accent);font-family:var(--display);letter-spacing:.04em}
+.horiz{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.horiz>div{border:1px solid var(--rule);background:var(--soft);padding:12px 14px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.horiz .t{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.horiz .g{font:600 26px var(--display);font-variant-numeric:tabular-nums;color:var(--up)}
+.recos{display:flex;flex-direction:column;gap:12px}
+.act{font:600 12px var(--display);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+/* calculadora */
+.calc{display:flex;flex-direction:column;gap:16px;border:1px solid var(--rule);background:var(--soft);padding:18px;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
+.calcgrid{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:28px}
+@media (max-width:760px){.calcgrid{grid-template-columns:1fr}}
+.cin{display:flex;flex-direction:column;gap:14px}
+.cin label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:500}
+.cin input[type=number],.cin select{font:inherit;font-family:var(--mono);padding:7px 9px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);width:100%}
+.cin input[type=range]{width:100%}
+.cout{display:flex;flex-direction:column;gap:14px;min-width:0}
+.scen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--rule)}
+.scen>div{padding:12px 14px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:3px;min-width:0}
+.scen>div:last-child{border-right:0}
+.scen .big{font:600 22px var(--display);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.scen .base{background:rgba(34,211,238,.07)}
+@media (max-width:480px){.scen{grid-template-columns:1fr}.scen>div{border-right:0;border-bottom:1px solid var(--rule)}}
+/* sdirm */
+.models{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.model{display:flex;flex-direction:column;gap:8px;border:1px solid var(--rule);background:var(--soft);padding:14px}
+.model .tag{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border:1px solid var(--rule);background:var(--soft)}
+.phases div{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:13px;display:flex;flex-direction:column;gap:4px}
+.phases b{font-family:var(--mono);font-weight:500;color:var(--accent);font-size:12px}
+.weights{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 20px;padding:16px;background:var(--soft);border:1px solid var(--rule)}
+.weights label{display:flex;flex-direction:column;gap:4px;font-size:12.5px}
+.weights output{font-family:var(--mono)}
+.score{display:flex;align-items:center;gap:8px}
+.score .meter{width:90px;height:8px;background:var(--paper);border:1px solid var(--rule);position:relative}
+.score .meter i{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.score .meter::after{content:"";position:absolute;left:60%;top:-3px;bottom:-3px;border-left:1px dashed var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:600}
+.alerts{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);background:var(--soft);padding:0 14px}
+.alert{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:14px;align-items:start;padding:12px 0;border-bottom:1px solid var(--rule)}
+.alert .num{font-size:15px}
+/* whatsapp */
+pre.msg{white-space:pre-wrap;font-family:var(--mono);font-size:13px;background:var(--soft);color:var(--ink);padding:16px;margin:0;border:1px solid var(--rule);max-width:80ch;overflow-x:auto}
+.btn{font:600 12px var(--display);letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:var(--paper);border:1px solid var(--accent);padding:9px 16px;cursor:pointer;align-self:flex-start}
+.btn:hover{box-shadow:0 0 16px rgba(34,211,238,.35)}
+footer{border-top:1px solid var(--rule);padding-top:14px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+footer a{color:var(--accent)}
+@media (max-width:560px){.stamp{text-align:left;width:100%}.alert{grid-template-columns:1fr}
+  header{gap:14px}.ring{width:68px;height:68px}.ring b span{font-size:15px;padding:1px 5px}h1{font-size:24px}
+  nav{flex-wrap:nowrap;overflow-x:auto;gap:0}nav button{padding:10px 10px;font-size:12px;white-space:nowrap}}
+@media (prefers-reduced-motion:no-preference){.bar i,.score .meter i{transition:width .3s ease}}
+</style>
+
+<script id="datos" type="application/json">
+{
+  "corte": "2026-10-22",
+  "generado": "2026-10-23 10:30 (hora Ecuador)",
+  "contexto": "La venta del jueves 22 se concentró en tecnología: Meta cayó casi 7% tras subir su guía de inversión en IA (USD 135-145 mil millones) con flujo de caja libre negativo en el trimestre, y los semiconductores perdieron más de 6%. El petróleo Brent subió a USD 112,91 por tensiones en Medio Oriente y el dinero buscó refugio en bonos del Tesoro: el rendimiento a 10 años cayó unos 19 puntos básicos, a 4,95%, su mayor caída diaria desde marzo de 2023. En Ecuador el riesgo país sigue sobre 570 puntos, su nivel más alto del año. Próximo evento: decisión de la Fed el miércoles 28 de octubre.",
+  "series": {
+    "sp500":   {"n":"S&P 500","u":"pts","dec":2,"grupo":"Renta variable EE.UU.","fechas":["10-06","10-22"],"v":[null,7663.43],"dia":-1.21,"ytd":13.73,"fuente":"Bloomberg / CNBC"},
+    "nasdaq":  {"n":"Nasdaq Composite","u":"pts","dec":2,"grupo":"Renta variable EE.UU.","fechas":["10-06","10-22"],"v":[27599.89,26008.86],"dia":-2.60,"ytd":13.37,"nota":"Máximo histórico 27.599,89 el 6-oct","fuente":"Bloomberg / Wikipedia"},
+    "dow":     {"n":"Dow Jones","u":"pts","dec":2,"grupo":"Renta variable EE.UU.","fechas":["10-22"],"v":[52867.98],"dia":0.02,"ytd":13.12,"fuente":"Bloomberg"},
+    "ust10":   {"n":"Bono Tesoro EE.UU. 10 años","u":"%","dec":2,"grupo":"Renta fija EE.UU.","fechas":["10-01","10-05","10-06","10-07","10-08","10-09","10-13","10-14","10-15","10-16","10-19","10-20","10-21","10-22"],"v":[5.23,5.31,5.27,5.28,5.23,5.24,5.22,5.19,5.10,5.09,5.15,5.12,5.13,4.95],"tipo":"tasa","fuente":"FRED DGS10 / Investing / Schwab"},
+    "fed":     {"n":"Tasa Fed (rango superior)","u":"%","dec":2,"grupo":"Renta fija EE.UU.","fechas":["09-16"],"v":[4.00],"tipo":"tasa","nota":"Rango 3,75-4,00% desde el 16-sep (alza de 25 pb)","fuente":"Reserva Federal"},
+    "hy":      {"n":"Spread high yield (OAS)","u":"%","dec":2,"grupo":"Crédito","fechas":["10-15","10-16","10-19","10-20","10-21"],"v":[3.23,3.31,3.29,3.33,3.27],"tipo":"riesgo","nota":"Promedio desde 1996: 5,16%","fuente":"FRED BAMLH0A0HYM2"},
+    "vix":     {"n":"VIX (volatilidad)","u":"pts","dec":2,"grupo":"Riesgo","fechas":["10-15","10-16","10-19","10-20","10-21"],"v":[16.46,19.99,18.44,17.31,16.68],"tipo":"riesgo","nota":"Último dato oficial publicado: 21-oct","fuente":"FRED VIXCLS"},
+    "oro":     {"n":"Oro (futuro dic.)","u":"USD/oz","dec":1,"grupo":"Materias primas","fechas":["10-01","10-05","10-06","10-07","10-08","10-09","10-12","10-13","10-14","10-15","10-16","10-19","10-20","10-21","10-22"],"v":[4202.3,4156.8,4187.1,4140.7,4157.0,4216.3,4190.6,4177.3,4107.9,4170.1,4181.1,4160.1,4142.6,4150.0,4046.8],"fuente":"Investing.com"},
+    "wti":     {"n":"Petróleo WTI","u":"USD/bbl","dec":2,"grupo":"Materias primas","fechas":["10-05","10-22"],"v":[89.43,99.09],"dia":1.42,"fuente":"TradingKey / Primicias"},
+    "brent":   {"n":"Petróleo Brent","u":"USD/bbl","dec":2,"grupo":"Materias primas","fechas":["10-22"],"v":[112.91],"dia":2.64,"nota":"Cerca de 115 en la mañana del 23-oct","fuente":"TradingKey"},
+    "btc":     {"n":"Bitcoin","u":"USD","dec":0,"grupo":"Cripto","fechas":["10-22"],"v":[81300],"dia":-3.5,"fuente":"TradingKey"},
+    "rp":      {"n":"Riesgo país Ecuador (EMBI)","u":"pb","dec":0,"grupo":"Ecuador","fechas":["09-01","10-02","10-05","10-16","10-19","10-20","10-21"],"v":[414.72,534.08,524.03,535.62,556.40,575,570.45],"tipo":"riesgo","nota":"Hace un año: cerca de 813 pb","fuente":"Banco Central del Ecuador"},
+    "ec2030":  {"n":"Bono Ecuador 2030","u":"% nominal","dec":2,"grupo":"Ecuador","fechas":["10-20"],"v":[96.98],"fuente":"BCE"},
+    "ec2034":  {"n":"Bono Ecuador 2034","u":"% nominal","dec":2,"grupo":"Ecuador","fechas":["10-20"],"v":[90.87],"fuente":"BCE"},
+    "ec2035":  {"n":"Bono Ecuador 2035","u":"% nominal","dec":2,"grupo":"Ecuador","fechas":["10-20"],"v":[82.26],"fuente":"BCE"},
+    "ec2039":  {"n":"Bono Ecuador 2039","u":"% nominal","dec":2,"grupo":"Ecuador","fechas":["10-20"],"v":[88.76],"fuente":"BCE"},
+    "ec2040":  {"n":"Bono Ecuador 2040","u":"% nominal","dec":2,"grupo":"Ecuador","fechas":["10-20"],"v":[71.64],"fuente":"BCE"},
+    "tpr":     {"n":"Tasa pasiva referencial BCE","u":"%","dec":2,"grupo":"Ecuador","fechas":["oct-26"],"v":[4.93],"tipo":"tasa","nota":"Depósito a plazo 361+ días: 6,21%","fuente":"BCE, tasas octubre 2026"}
+  },
+  "plazos_bce": [["30-60 días",3.98],["61-90 días",4.31],["91-120 días",4.42],["121-180 días",4.36],["181-360 días",4.96],["361 días y más",6.21],["Ahorro",1.57]],
+  "valuacion": {"cape":40.7,"cape_pct":98.9,"cape_prom":32.7,"ecy":0.55,"margin_tn":1.50,"margin_ago_tn":1.45}
+}
+</script>
+
+<div class="wrap">
+  <header>
+    <div class="ring" aria-hidden="true">
+      <svg viewBox="0 0 112 112">
+        <circle cx="56" cy="56" r="52" fill="none" stroke="#15405a" stroke-width="1"/>
+        <g class="spin"><circle cx="56" cy="56" r="44" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="40 14 8 14"/></g>
+        <circle cx="56" cy="56" r="34" fill="none" stroke="#22d3ee" stroke-opacity=".35" stroke-width="6" stroke-dasharray="2 4"/>
+      </svg>
+      <b><span>MP</span></b>
+    </div>
+    <div class="brand">
+      <div class="eyebrow">MERPAZ ALFA · Observatorio en línea</div>
+      <h1>Observatorio de Inversión</h1>
+    </div>
+    <div class="stamp">Cierre de mercado <b id="corte"></b><br>Generado <span id="gen"></span><br>Próxima actualización: lun-vie 07:30 · reporte a Gmail</div>
+  </header>
+
+  <nav role="tablist" aria-label="Tableros">
+    <button role="tab" id="t-variaciones" data-v="variaciones">Variaciones</button>
+    <button role="tab" id="t-sdirm" data-v="sdirm">SDIRM</button>
+    <button role="tab" id="t-recomendacion" data-v="recomendacion">Recomendación</button>
+    <button role="tab" id="t-notificacion" data-v="notificacion">Notificación</button>
+  </nav>
+
+  <!-- VARIACIONES -->
+  <section class="view" id="v-variaciones" role="tabpanel">
+    <div class="summary" id="summary"></div>
+    <div class="read"><h3>Lectura del día</h3><p id="contexto"></p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Indicador</th><th class="r">Último</th><th class="r">Var. día</th><th class="r">Var. desde inicio de serie</th><th>Tendencia</th><th>Estado</th><th>Fuente</th></tr></thead>
+      <tbody id="tabla"></tbody>
+    </table></div>
+    <div>
+      <h2>Históricos y proyección a 5 días</h2>
+      <p class="note" style="margin-top:6px">Línea continua: datos reales de octubre. Línea punteada y banda: extensión de la tendencia de los últimos 10 registros con su error típico. Es una referencia estadística, no un pronóstico.</p>
+    </div>
+    <div class="charts" id="charts"></div>
+    <div>
+      <h2>Tasas pasivas en Ecuador por plazo</h2>
+      <p class="note" style="margin-top:6px">Tasas efectivas referenciales del BCE vigentes en octubre de 2026, comparadas con el Tesoro de EE.UU. a 10 años.</p>
+    </div>
+    <div class="chart" id="plazos"></div>
+  </section>
+
+  <!-- RECOMENDACIÓN -->
+  <section class="view" id="v-recomendacion" role="tabpanel" hidden>
+    <div class="alerta" id="alertaInv"></div>
+    <div class="read"><h3>Criterio</h3><p>Cada perfil reparte el capital entre instrumentos con datos públicos de hoy. La renta fija conocida suma solo lo que paga un rendimiento ya pactado o cotizado. La prueba de estrés aplica una caída de la bolsa y estima cuánto perdería cada cartera según cómo reacciona cada activo.</p></div>
+    <div class="controls">
+      <label for="capital">Capital a invertir (USD)
+        <input id="capital" type="number" min="100" step="100" value="10000" style="font:inherit;font-family:var(--mono);width:120px;padding:5px 8px;border:1px solid var(--rule);background:var(--paper);color:var(--ink)">
+      </label>
+      <label for="shock">Caída de la bolsa a simular <output id="shockOut" class="num">-20%</output>
+        <input id="shock" type="range" min="0" max="40" step="5" value="20">
+      </label>
+      <span class="seg" role="group" aria-label="Destacar perfil" id="segPerfil">
+        <button data-p="conservador">Conservador</button><button data-p="moderado" aria-pressed="true">Moderado</button><button data-p="agresivo">Agresivo</button>
+      </span>
+    </div>
+    <div class="simres" id="simRes" aria-live="polite"></div>
+    <div class="recos">
+      <div><h2>Recomendaciones del día</h2><p class="note" style="margin-top:6px">Lo que conviene hacer hoy con el perfil elegido, combinando la cartera base con las señales del SDIRM. Cambia si mueve los pesos en la pestaña SDIRM.</p></div>
+      <div class="tbl"><table>
+        <thead><tr><th>Acción</th><th>Activo</th><th class="r">SDIRM</th><th>Motivo</th><th>Cuándo salir</th></tr></thead>
+        <tbody id="recoRows"></tbody>
+      </table></div>
+    </div>
+    <div class="profiles" id="profiles"></div>
+    <div class="calc">
+      <div><h2>Calculadora de inversión</h2><p class="note" style="margin-top:6px">Cuánto ganaría en dólares según el monto, el plazo y dónde invierta. La renta fija usa las tasas publicadas hoy; la parte variable usa tres escenarios supuestos por MERPAZ.</p></div>
+      <div class="calcgrid">
+        <div class="cin">
+          <label for="cMonto">Monto inicial (USD)<input id="cMonto" type="number" min="0" step="100" value="10000"></label>
+          <label for="cAporte">Aporte mensual (USD)<input id="cAporte" type="number" min="0" step="50" value="0"></label>
+          <label for="cPlazo">Plazo <output id="cPlazoOut" class="num">12 meses</output><input id="cPlazo" type="range" min="1" max="60" step="1" value="12"></label>
+          <label for="cDonde">Dónde invertir
+            <select id="cDonde">
+              <option value="p:conservador">Cartera conservadora</option>
+              <option value="p:moderado" selected>Cartera moderada</option>
+              <option value="p:agresivo">Cartera agresiva</option>
+              <option value="i:dep">Solo depósito a plazo Ecuador</option>
+              <option value="i:tb">Solo Letras del Tesoro EE.UU.</option>
+              <option value="i:ust">Solo bono Tesoro EE.UU. 10 años</option>
+              <option value="i:ec35">Solo bono Ecuador 2035</option>
+              <option value="i:spx">Solo S&amp;P 500</option>
+            </select>
+          </label>
+        </div>
+        <div class="cout" id="cOut"></div>
+      </div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Instrumento</th><th>Tipo de riesgo</th><th class="r">Rendimiento / precio</th><th class="r">Sensibilidad a la bolsa</th><th>Por qué hoy</th></tr></thead>
+      <tbody id="instr"></tbody>
+    </table></div>
+  </section>
+
+  <!-- SDIRM -->
+  <section class="view" id="v-sdirm" role="tabpanel" hidden>
+    <div>
+      <div class="eyebrow">SDIRM</div>
+      <h2 style="margin-top:4px">Sistema de Detección de Ineficiencias y Riesgos de Mercado</h2>
+      <p class="lede" style="margin-top:8px">Metodología propia de MERPAZ: una búsqueda diaria de activos mal valorados y de carteras que podrían verse forzadas a vender.</p>
+    </div>
+    <div class="models">
+      <div class="model"><span class="tag">Modelo A · Sobrevaloración</span><h3 style="color:var(--ink)">Detectar la burbuja antes que el mercado</h3><p>Busca la diferencia entre el precio que el mercado paga y el valor que justifican los fundamentos. No basta con que un activo esté caro: se revisa la calidad de la deuda y de los flujos que lo sostienen.</p></div>
+      <div class="model"><span class="tag">Modelo B · Riesgo extremo</span><h3 style="color:var(--ink)">Detectar quién tendría que vender</h3><p>Mide apalancamiento, volatilidad y escenarios extremos. La pregunta es qué caída moderada bastaría para que alguien pierda más de lo que puede absorber y salga a vender.</p></div>
+    </div>
+    <div class="phases">
+      <div><b>Fase 1</b>Recopilar: precios, deuda, tasas, flujo de caja, spreads, morosidad.</div>
+      <div><b>Fase 2</b>Buscar anomalías: precio contra ingresos, flujo, deuda y riesgos reales.</div>
+      <div><b>Fase 3</b>Simular crisis: caídas de 10%, 20% y 30%, financiación más cara.</div>
+      <div><b>Fase 4</b>Identificar: activo infravalorado, castigo injustificado o sobrevaloración.</div>
+      <div><b>Fase 5</b>Validar y controlar: fuente independiente, pérdida máxima, salida definida.</div>
+    </div>
+    <div>
+      <h2>Ranking de oportunidades del día</h2>
+      <p class="note" style="margin-top:6px">Puntuación de 0 a 100. Sobre 75: señal fuerte. Entre 60 y 75: vigilar con posición pequeña. Bajo 60: sin señal. Mueva los pesos para ver cómo cambia el orden.</p>
+    </div>
+    <div class="weights" id="weights"></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Activo</th><th>Modelo</th><th>Hipótesis</th><th class="r">Puntuación</th><th>Señal</th><th>Condición de salida</th></tr></thead>
+      <tbody id="rank"></tbody>
+    </table></div>
+    <div>
+      <h2>Monitor de ventas forzadas</h2>
+      <p class="note" style="margin-top:6px">Señales de presión que podrían obligar a vender a carteras apalancadas.</p>
+    </div>
+    <div class="alerts" id="alerts"></div>
+  </section>
+
+  <!-- NOTIFICACIÓN -->
+  <section class="view" id="v-notificacion" role="tabpanel" hidden>
+    <div><h2>Notificación diaria</h2><p class="note" style="margin-top:6px">El reporte llega solo a su correo. Gratis y sin intermediarios fuera de Google.</p></div>
+    <div class="alerta" id="alertaInv2"></div>
+    <div class="summary">
+      <div><span class="lbl">Canal</span><span class="val" style="font-size:20px">Gmail</span><span class="chg flat">dmerchan.dmp@gmail.com</span></div>
+      <div><span class="lbl">Frecuencia</span><span class="val" style="font-size:20px">Lun a vie</span><span class="chg flat">07:30 hora Ecuador</span></div>
+      <div><span class="lbl">Adjunto</span><span class="val" style="font-size:20px">PDF</span><span class="chg flat">Reporte de 3 páginas</span></div>
+      <div><span class="lbl">Último reporte</span><span class="val" style="font-size:20px" id="nCorte"></span><span class="chg flat" id="nGen"></span></div>
+    </div>
+    <div class="read"><h3>Qué incluye</h3><p>Indicadores del cierre, lectura del día, ranking SDIRM, monitor de ventas forzadas y las recomendaciones de los tres perfiles con su simulación en dólares. El tablero completo y su PDF quedan en OneDrive, carpeta APP, Observatorio MERPAZ.</p></div>
+    <div><h3 style="margin-bottom:8px">Vista previa del correo de hoy</h3><pre class="msg" id="nPrev"></pre></div>
+  </section>
+
+  <footer>
+    <span>Tablero informativo elaborado por MERPAZ Consultores con datos públicos. No constituye asesoría financiera ni recomendación personalizada de compra o venta. Verifique condiciones con su institución financiera antes de invertir.</span>
+    <span>Fuentes: Banco Central del Ecuador, FRED (Reserva Federal de St. Louis), Reserva Federal, Bloomberg, CNBC, Investing.com, Schwab, TradingKey, GuruFocus, FINRA vía StockTitan, Primicias, Expreso.</span>
+  </footer>
+</div>
+
+<script>
+const D = JSON.parse(document.getElementById('datos').textContent);
+const S = D.series;
+const $ = s => document.querySelector(s);
+const fmt = (x,d=2) => x==null?'—':x.toLocaleString('es-EC',{minimumFractionDigits:d,maximumFractionDigits:d});
+const last = k => { const v=S[k].v; for(let i=v.length-1;i>=0;i--) if(v[i]!=null) return v[i]; return null; };
+const first = k => S[k].v.find(x=>x!=null);
+const prev = k => { const v=S[k].v.filter(x=>x!=null); return v.length>1?v[v.length-2]:null; };
+const cls = x => x>0.0001?'pos':x<-0.0001?'neg':'flat';
+const sign = (x,d=2) => (x>0?'+':'')+fmt(x,d);
+
+$('#corte').textContent = D.corte.split('-').reverse().join('/');
+$('#gen').textContent = D.generado;
+$('#contexto').textContent = D.contexto;
+
+/* cambios: para tasas y riesgo en puntos básicos / puntos */
+function changes(k){
+  const s=S[k], L=last(k), P=prev(k), F=first(k);
+  let dia = s.dia!=null? s.dia : (P!=null? (L/P-1)*100 : null);
+  let tot = (F!=null && s.v.filter(x=>x!=null).length>1)? (L/F-1)*100 : null;
+  if(s.tipo==='tasa'){ dia = P!=null? (L-P)*100 : null; tot = s.v.length>1? (L-F)*100 : null; }
+  if(s.tipo==='riesgo' && s.u==='%'){ dia = P!=null?(L-P)*100:null; tot = s.v.length>1?(L-F)*100:null; }
+  return {L,dia,tot,unit:(s.tipo==='tasa'||(s.tipo==='riesgo'&&s.u==='%'))?'pb':'%'};
+}
+function estado(k){
+  const L=last(k);
+  switch(k){
+    case 'vix': return L>=20?['cr','Tensión']:L>=17?['wa','Atención']:['ok','Calma'];
+    case 'hy': return L<3.5?['wa','Spread comprimido']:L<5?['ok','Normal']:['cr','Estrés'];
+    case 'rp': return L>=550?['cr','Máximo del año']:L>=500?['wa','Elevado']:['ok','Contenido'];
+    case 'ust10': return L>=5?['wa','Tasa alta']:['ok','Bajo 5%'];
+    case 'nasdaq': return ['cr','-'+fmt((1-L/27599.89)*100,1)+'% desde máximo'];
+    case 'oro': return ['wa','Corrección'];
+    case 'brent': case 'wti': return ['wa','Shock de oferta'];
+    case 'ec2035': case 'ec2040': return ['wa','Bajo la par'];
+    default: return ['ne','—'];
+  }
+}
+function spark(v){
+  const p=v.filter(x=>x!=null); if(p.length<3) return '<span class="note">Serie en construcción</span>';
+  const w=90,h=26,mn=Math.min(...p),mx=Math.max(...p),r=mx-mn||1;
+  const pts=p.map((y,i)=>[i*(w-4)/(p.length-1)+2, h-3-(y-mn)/r*(h-6)]);
+  const d=pts.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');
+  const e=pts[pts.length-1];
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${d}" fill="none" stroke="var(--muted)" stroke-width="1.4"/><circle cx="${e[0]}" cy="${e[1]}" r="2.6" fill="var(--ink)"/></svg>`;
+}
+
+/* resumen */
+const sumKeys=['sp500','nasdaq','ust10','oro','brent','rp'];
+$('#summary').innerHTML = sumKeys.map(k=>{
+  const s=S[k], c=changes(k);
+  const ch = c.dia==null?'':`<span class="chg ${cls(k==='rp'||k==='ust10'?-c.dia:c.dia)}">${sign(c.dia,c.unit==='pb'?0:2)} ${c.unit==='pb'?'pb':'%'} día</span>`;
+  return `<div><span class="lbl">${s.n}</span><span class="val">${fmt(c.L,s.dec)}${s.u==='%'?'%':''}</span>${ch}</div>`;
+}).join('');
+
+/* tabla */
+let grp='', rows='';
+for(const k in S){
+  const s=S[k], c=changes(k), [ec,et]=estado(k);
+  if(s.grupo!==grp){ grp=s.grupo; rows+=`<tr class="grp"><td colspan="7">${grp}</td></tr>`; }
+  const isPb=c.unit==='pb';
+  rows+=`<tr><td>${s.n}${s.nota?`<small>${s.nota}</small>`:''}</td>
+  <td class="r num">${fmt(c.L,s.dec)} <small style="display:inline">${s.u}</small></td>
+  <td class="r num ${cls(c.dia)}">${c.dia==null?'—':sign(c.dia,isPb?0:2)+(isPb?' pb':'%')}</td>
+  <td class="r num ${cls(c.tot)}">${c.tot==null?'—':sign(c.tot,isPb?0:2)+(isPb?' pb':'%')}<small>${s.fechas.length>1?'desde '+s.fechas[0]:''}</small></td>
+  <td>${spark(s.v)}</td><td><span class="pill ${ec}">${et}</span></td><td class="note">${s.fuente}</td></tr>`;
+}
+$('#tabla').innerHTML=rows;
+
+/* gráfico con proyección lineal */
+function lineChart(k){
+  const s=S[k], pts=s.v.map((y,i)=>[i,y]).filter(p=>p[1]!=null);
+  const base=pts.slice(-10), n=base.length;
+  const mx=base.reduce((a,p)=>a+p[0],0)/n, my=base.reduce((a,p)=>a+p[1],0)/n;
+  const b=base.reduce((a,p)=>a+(p[0]-mx)*(p[1]-my),0)/base.reduce((a,p)=>a+(p[0]-mx)**2,0);
+  const a0=my-b*mx;
+  const se=Math.sqrt(base.reduce((a,p)=>a+(p[1]-(a0+b*p[0]))**2,0)/Math.max(1,n-2));
+  const L=pts[pts.length-1][0];
+  const proj=[1,2,3,4,5].map(h=>[L+h,a0+b*(L+h)]);
+  const all=[...pts.map(p=>p[1]),...proj.map(p=>p[1]+se*1.5),...proj.map(p=>p[1]-se*1.5)];
+  let mn=Math.min(...all), mxv=Math.max(...all); const pad=(mxv-mn)*0.12||1; mn-=pad; mxv+=pad;
+  const W=520,H=210,l=52,r=14,t=14,bt=28, X=i=>l+i/(L+5)*(W-l-r), Y=y=>t+(mxv-y)/(mxv-mn)*(H-t-bt);
+  const ticks=[0,1,2,3].map(i=>mn+(mxv-mn)*i/3);
+  let g=ticks.map(v=>`<line x1="${l}" x2="${W-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--rule)"/><text x="${l-6}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="var(--mono)">${fmt(v,s.dec>1?2:0)}</text>`).join('');
+  const line=pts.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)).join(' ');
+  const area=line+` L${X(L).toFixed(1)} ${H-bt} L${X(pts[0][0]).toFixed(1)} ${H-bt} Z`;
+  const pl=`M${X(L)} ${Y(pts[pts.length-1][1])} `+proj.map(p=>`L${X(p[0]).toFixed(1)} ${Y(p[1]).toFixed(1)}`).join(' ');
+  const band=`M${X(L)} ${Y(pts[pts.length-1][1])} `+proj.map(p=>`L${X(p[0])} ${Y(p[1]+se*1.5)}`).join(' ')+' '+[...proj].reverse().map(p=>`L${X(p[0])} ${Y(p[1]-se*1.5)}`).join(' ')+' Z';
+  const e=pts[pts.length-1], pe=proj[4];
+  g+=`<text x="${X(0)}" y="${H-8}" font-size="11" fill="var(--muted)" font-family="var(--mono)">${s.fechas[0]}</text><text x="${X(L)}" y="${H-8}" font-size="11" fill="var(--muted)" text-anchor="middle" font-family="var(--mono)">${s.fechas[s.fechas.length-1]}</text><text x="${X(L+5)}" y="${H-8}" font-size="11" fill="var(--muted)" text-anchor="end" font-family="var(--mono)">+5 días</text>`;
+  const svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${s.n}, histórico y proyección">${g}
+   <path d="${band}" fill="var(--accent)" fill-opacity=".12" stroke="none"/>
+   <path d="${area}" fill="var(--ink)" fill-opacity=".05" stroke="none"/>
+   <path d="${line}" fill="none" stroke="var(--ink)" stroke-width="1.8"/>
+   <path d="${pl}" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="4 4"/>
+   <circle cx="${X(e[0])}" cy="${Y(e[1])}" r="3.5" fill="var(--ink)"/>
+   <circle cx="${X(pe[0])}" cy="${Y(pe[1])}" r="3" fill="var(--paper)" stroke="var(--accent)" stroke-width="1.6"/></svg>`;
+  const dir=b>0?'al alza':'a la baja';
+  return `<div class="chart"><div class="hd"><strong>${s.n}</strong><span class="num note">Hoy ${fmt(e[1],s.dec)} · tendencia ${dir} · ref. +5 días ${fmt(pe[1],s.dec)} (±${fmt(se*1.5,s.dec)})</span></div>${svg}</div>`;
+}
+$('#charts').innerHTML=['ust10','oro','rp','vix','hy'].map(lineChart).join('');
+
+/* plazos */
+(function(){
+  const P=D.plazos_bce, W=620,H=40*P.length+40,l=130,r=60, mx=7;
+  const X=v=>l+v/mx*(W-l-r), ust=last('ust10');
+  let g=P.map((p,i)=>{const y=20+i*40;return `<text x="${l-10}" y="${y+16}" text-anchor="end" font-size="12.5" fill="var(--ink)">${p[0]}</text><rect x="${l}" y="${y+4}" width="${X(p[1])-l}" height="18" fill="${p[1]>=ust?'var(--accent)':'var(--muted)'}" fill-opacity="${p[1]>=ust?1:.45}"/><text x="${X(p[1])+6}" y="${y+18}" font-size="12" font-family="var(--mono)" fill="var(--ink)">${fmt(p[1])}%</text>`}).join('');
+  g+=`<line x1="${X(ust)}" x2="${X(ust)}" y1="10" y2="${H-14}" stroke="var(--down)" stroke-dasharray="3 3"/><text x="${X(ust)}" y="${H-2}" font-size="11" fill="var(--down)" text-anchor="middle" font-family="var(--mono)">Tesoro 10A ${fmt(ust)}%</text>`;
+  $('#plazos').innerHTML=`<div class="tbl" style="border:0"><svg viewBox="0 0 ${W} ${H}" style="min-width:480px" role="img" aria-label="Tasas pasivas BCE por plazo">${g}</svg></div><p class="note">Solo el depósito a 361 días o más supera hoy al Tesoro de EE.UU. a 10 años, a cambio de inmovilizar el dinero un año y asumir el riesgo de la institución local.</p>`;
+})();
+
+/* ===== RECOMENDACIÓN ===== */
+const INS = {
+  dep:  {n:'Depósito a plazo Ecuador (181 a 361+ días)', r:'Conservador', y:5.6, beta:0, why:'BCE oct-26: 4,96% a 181-360 días y 6,21% a 361+. Elegir banco con buena calificación.', ytxt:'4,96% – 6,21%'},
+  tb:   {n:'Letras del Tesoro EE.UU. (T-bills, 3-6 meses)', r:'Conservador', y:3.9, beta:0, why:'Liquidez inmediata y riesgo soberano de EE.UU. Rinden cerca del rango de la Fed (3,75-4,00%).', ytxt:'≈ 3,9% (ref. Fed)'},
+  ust:  {n:'Bono del Tesoro EE.UU. 10 años', r:'Conservador', y:last('ust10'), beta:-0.15, why:'4,95% cerca de máximos de dos décadas; sube de precio cuando la bolsa cae (refugio del 22-oct).', ytxt:fmt(last('ust10'))+'%'},
+  def:  {n:'Acciones defensivas / S&P 500 igual ponderado', r:'Moderado', y:null, beta:0.7, why:'Consumo básico y salud resistieron la venta tecnológica; menos exposición a megacaps de IA.', ytxt:'variable'},
+  spx:  {n:'Índice S&P 500 (ETF amplio)', r:'Agresivo', y:null, beta:1.0, why:'CAPE 40,7, percentil 98,9 desde 1881: valuación extrema, entrar escalonado.', ytxt:'variable'},
+  oro:  {n:'Oro', r:'Moderado', y:null, beta:0.1, why:'Cayó 2,5% el 22-oct a ~4.047; protege ante inflación por petróleo, pero sufre con tasas altas.', ytxt:fmt(last('oro'),0)+' USD/oz'},
+  ec30: {n:'Bono soberano Ecuador 2030', r:'Moderado', y:null, beta:0.5, why:'Cotiza a 96,98 (cerca de la par); vencimiento corto con riesgo país en 570 pb.', ytxt:'precio 96,98'},
+  ec35: {n:'Bono soberano Ecuador 2035', r:'Agresivo', y:null, beta:0.6, why:'Cotiza a 82,26: descuento amplio. Gana si el riesgo país vuelve hacia 415 pb (nivel de 1-sep).', ytxt:'precio 82,26'},
+  ene:  {n:'Sector energía', r:'Agresivo', y:null, beta:0.8, why:'Brent en 112,91 por Medio Oriente; alto beneficio de corto plazo, pero muy volátil.', ytxt:'variable'}
+};
+const PERF = {
+  conservador:{t:'Conservador',d:'Preservar capital y cobrar una renta conocida. Horizonte de 6 a 12 meses.',a:{dep:45,tb:35,ust:15,oro:5}},
+  moderado:{t:'Moderado',d:'Base de renta fija con una parte de crecimiento defensivo. Horizonte de 1 a 3 años.',a:{dep:25,tb:20,ust:20,def:15,oro:10,ec30:5,spx:5}},
+  agresivo:{t:'Agresivo',d:'Busca las oportunidades del SDIRM aceptando caídas fuertes. Horizonte de 3 años o más.',a:{dep:10,tb:10,ust:20,def:15,spx:10,ec35:15,oro:10,ene:10}}
+};
+let perfilSel='moderado';
+try{ const s=localStorage.getItem('mpz-perfil'); if(s&&PERF[s]) perfilSel=s; }catch(e){}
+function renderPerf(){
+  const cap=Math.max(0,+$('#capital').value||0), sh=+$('#shock').value;
+  $('#shockOut').textContent='-'+sh+'%';
+  document.querySelectorAll('#segPerfil button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===perfilSel));
+  $('#profiles').innerHTML=Object.entries(PERF).map(([k,p])=>{
+    let fixedW=0,fixedY=0,loss=0;
+    const rows=Object.entries(p.a).map(([i,w])=>{const it=INS[i]; if(it.y!=null){fixedW+=w;fixedY+=w*it.y;} loss+=w/100*it.beta*sh;
+      return `<div class="row"><div>${it.n}<div class="bar"><i style="width:${w}%"></i></div></div><span class="num" style="text-align:right">${w}%</span></div>`}).join('');
+    const renta=fixedY/100;
+    return `<article class="prof ${k===perfilSel?'sel':''}"><div class="top"><h2>${p.t}</h2><span class="pill ${k==='conservador'?'ok':k==='moderado'?'wa':'cr'}">Riesgo ${p.t.toLowerCase()}</span></div>
+      <p class="note">${p.d}</p><div class="alloc">${rows}</div>
+      <div class="kv"><span>Renta fija conocida anual</span><span>${fmt(renta)}% · USD ${fmt(cap*renta/100,0)}</span>
+      <span>Parte con renta pactada</span><span>${fixedW}%</span>
+      <span>Ganancia estimada en ${HOR[k][0]} meses</span><span class="pos">+USD ${fmt(simular(p.a,cap,0,HOR[k][0],1).v-cap,0)}</span>
+      <span>Ganancia estimada en ${HOR[k][1]} meses</span><span class="pos">+USD ${fmt(simular(p.a,cap,0,HOR[k][1],1).v-cap,0)}</span>
+      <span>Pérdida estimada si la bolsa cae ${sh}%</span><span class="${loss>0?'neg':'pos'}">${loss>0?'-':'+'}${fmt(Math.abs(loss),1)}% · USD ${fmt(cap*Math.abs(loss)/100,0)}</span></div></article>`;
+  }).join('');
+  const P=PERF[perfilSel], H=HOR[perfilSel];
+  const g=H.map(m=>[0,1,2].map(e=>simular(P.a,cap,0,m,e).v-cap));
+  const nm={conservador:'conservadora',moderado:'moderada',agresivo:'agresiva'}[perfilSel];
+  $('#simRes').innerHTML=`<p class="lead">Si invierte <b>USD ${fmt(cap,0)}</b> en la cartera <b>${nm}</b>: ${P.d}</p>
+   <div class="horiz">${H.map((m,i)=>`<div><span class="t">En ${m} meses${m>=12?' ('+fmt(m/12,0)+(m>=24?' años':' año')+')':''}</span><span class="g">+USD ${fmt(g[i][1],0)}</span><span class="note num">Saldo USD ${fmt(cap+g[i][1],0)} · rango ${g[i][0]>=0?'+':'-'}USD ${fmt(Math.abs(g[i][0]),0)} a +USD ${fmt(g[i][2],0)}</span></div>`).join('')}
+   ${(()=>{const L=cap*Object.entries(P.a).reduce((a,[i,w])=>a+w/100*INS[i].beta*sh,0)/100;return `<div><span class="t">Si la bolsa cae ${sh}% mañana</span><span class="g" style="color:${L>0?'var(--down)':'var(--up)'}">${L>0?'-':'+'}USD ${fmt(Math.abs(L),0)}</span><span class="note">${L>0?'Pérdida temporal estimada de la cartera':'Sin pérdida: los bonos del Tesoro compensan la caída'}</span></div>`})()}</div>
+   <p class="note">Ganancia en el escenario base; el rango va del escenario pesimista al optimista. Interés compuesto, sin comisiones ni impuestos.</p>`;
+  if(typeof renderRecos==='function') renderRecos();
+}
+const HOR={conservador:[6,12],moderado:[12,36],agresivo:[36,60]};
+$('#instr').innerHTML=Object.values(INS).map(it=>`<tr><td>${it.n}</td><td><span class="pill ${it.r==='Conservador'?'ok':it.r==='Moderado'?'wa':'cr'}">${it.r}</span></td><td class="r num">${it.ytxt}</td><td class="r num">${it.beta>0?'+':''}${fmt(it.beta,2)}</td><td style="min-width:300px">${it.why}</td></tr>`).join('');
+$('#capital').addEventListener('input',renderPerf); $('#shock').addEventListener('input',renderPerf);
+document.querySelectorAll('#segPerfil button').forEach(b=>b.addEventListener('click',()=>{perfilSel=b.dataset.p;try{localStorage.setItem('mpz-perfil',perfilSel)}catch(e){};renderPerf();}));
+
+/* ===== CALCULADORA ===== */
+/* rendimiento anual supuesto por escenario [pesimista, base, optimista] en % */
+const ESC={tb:[3.9,3.9,3.9],ust:[1.5,last('ust10'),8],def:[-10,6,12],spx:[-20,5,15],oro:[-12,4,15],ec30:[0,7,10],ec35:[-10,9,18],ene:[-20,6,20]};
+function tasaDep(m){const P=D.plazos_bce;return m<=2?P[0][1]:m<=3?P[1][1]:m<=4?P[2][1]:m<=6?P[3][1]:m<12?P[4][1]:P[5][1];}
+function retAnual(key,m,e){return key==='dep'?tasaDep(m):ESC[key][e];}
+function simular(mix,monto,aporte,m,e){
+  let v=monto; const rm=Object.entries(mix).reduce((a,[k,w])=>a+w/100*retAnual(k,m,e),0);
+  const f=Math.pow(1+rm/100,1/12);
+  for(let i=0;i<m;i++){v=v*f+(i<m-1?aporte:0);}
+  return {v,rm};
+}
+function renderCalc(){
+  const monto=Math.max(0,+$('#cMonto').value||0), ap=Math.max(0,+$('#cAporte').value||0), m=+$('#cPlazo').value;
+  $('#cPlazoOut').textContent=m+(m===1?' mes':' meses')+(m>=12?' ('+fmt(m/12,1)+' años)':'');
+  const sel=$('#cDonde').value, [t,k]=sel.split(':'); const mix=t==='p'?PERF[k].a:{[k]:100};
+  const inv=monto+ap*Math.max(0,m-1);
+  const R=[0,1,2].map(e=>simular(mix,monto,ap,m,e));
+  const fijo=Object.entries(mix).every(([x])=>x==='dep'||x==='tb');
+  const lab=['Pesimista','Base','Optimista'];
+  const cards=(fijo?[1]:[0,1,2]).map(e=>{const g=R[e].v-inv;return `<div class="${e===1?'base':''}"><span class="note">${fijo?'Rendimiento pactado':lab[e]}</span><span class="big ${cls(g)}">${g>=0?'+':'-'}USD ${fmt(Math.abs(g),0)}</span><span class="note num">Saldo final USD ${fmt(R[e].v,0)} · ${fmt(R[e].rm)}% anual</span></div>`}).join('');
+  $('#cOut').innerHTML=`<div class="scen" style="${fijo?'grid-template-columns:1fr':''}">${cards}</div>
+   <div class="kv" style="border-top:0;padding-top:0"><span>Capital aportado en total</span><span>USD ${fmt(inv,0)}</span>
+   ${Object.keys(mix).includes('dep')?`<span>Tasa BCE aplicada al depósito (${m} meses)</span><span>${fmt(tasaDep(m))}%</span>`:''}
+   <span>Ganancia escenario base por mes, en promedio</span><span>USD ${fmt((R[1].v-inv)/m,0)}</span></div>
+   <p class="note">Interés compuesto mensual. El depósito usa la tasa pasiva referencial del BCE para ese plazo; las Letras del Tesoro, una referencia cercana a la tasa de la Fed. Los escenarios de acciones, oro, energía y bonos con precio de mercado son supuestos de MERPAZ, no garantías. No incluye comisiones ni impuestos: consulte la retención aplicable en su banco o casa de valores.</p>`;
+}
+['cMonto','cAporte','cPlazo','cDonde'].forEach(id=>document.getElementById(id).addEventListener('input',renderCalc));
+renderCalc();
+
+/* ===== SDIRM ===== */
+const VARS=[['gap','Diferencia valor estimado vs precio',30],['det','Deterioro o riesgo no reconocido',25],['evi','Evidencia verificable',20],['cat','Catalizadores',15],['liq','Liquidez y ejecución',10]];
+const W={}; VARS.forEach(v=>W[v[0]]=v[2]);
+const OPP=[
+  {n:'Megacaps de IA / Nasdaq',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Burbuja',h:'Precio descuenta retornos de la inversión en IA que el flujo de caja aún no muestra. Meta: capex 135-145 mil millones y flujo libre negativo en el trimestre. CAPE del mercado 40,7.',s:{gap:85,det:75,evi:70,cat:80,liq:95},x:'Invalidar si el Nasdaq recupera su máximo de 27.600 o si el flujo libre de las megacaps vuelve a crecer dos trimestres seguidos.'},
+  {n:'Bono del Tesoro EE.UU. 10 años',dir:'comprar',pf:['conservador','moderado','agresivo'],m:'Oportunidad defensiva',h:'Rinde 4,95% tras tocar 5,36%. Si la desaceleración tecnológica se extiende, el bono gana precio como el 22-oct.',s:{gap:70,det:60,evi:75,cat:70,liq:100},x:'Salir o reducir si el rendimiento cierra sobre 5,30% (la Fed sube más de lo previsto).'},
+  {n:'Crédito high yield (bonos basura)',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Riesgo ignorado',h:'Spread de 3,27% frente a un promedio histórico de 5,16%, con tasas de 5% y petróleo sobre 100. El mercado cobra poco por el riesgo de impago.',s:{gap:75,det:65,evi:60,cat:60,liq:70},x:'Señal pierde fuerza si la Fed recorta tasas o si el spread ya supera 4,5%.'},
+  {n:'Bono soberano Ecuador 2035',dir:'comprar',pf:['agresivo'],m:'Oportunidad castigada',h:'Precio 82,26 con riesgo país en 570 pb, 155 pb más que el 1-sep. Si el riesgo vuelve hacia 450 pb el bono se revaloriza.',s:{gap:75,det:60,evi:55,cat:55,liq:45},x:'Cortar pérdida si el riesgo país supera 700 pb o se retrasa una revisión del FMI.'},
+  {n:'Oro tras la corrección',dir:'comprar',pf:['moderado','agresivo'],m:'Oportunidad táctica',h:'Cayó de 4.216 (9-oct) a 4.047. La inflación por petróleo lo apoya; tasas altas lo frenan.',s:{gap:45,det:40,evi:50,cat:55,liq:90},x:'Salir si cierra bajo 3.950 USD/oz.'},
+  {n:'Bitcoin',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Activo especulativo',h:'Cayó 3,5% en el día junto al apetito por riesgo; sin flujo de caja que ancle el valor.',s:{gap:40,det:50,evi:35,cat:45,liq:85},x:'No aplica en perfiles conservador y moderado.'}
+];
+function scoreOf(o){const tw=VARS.reduce((a,v)=>a+W[v[0]],0)||1; return VARS.reduce((a,v)=>a+o.s[v[0]]*W[v[0]],0)/tw;}
+function renderRank(){
+  const tw=VARS.reduce((a,v)=>a+W[v[0]],0);
+  VARS.forEach(v=>{const o=document.getElementById('o-'+v[0]); if(o) o.textContent=W[v[0]]+'% (efectivo '+fmt(W[v[0]]/tw*100,0)+'%)';});
+  const list=OPP.map(o=>({...o,sc:scoreOf(o)})).sort((a,b)=>b.sc-a.sc);
+  if(typeof renderRecos==='function') renderRecos();
+  $('#rank').innerHTML=list.map(o=>{const [c,t]=o.sc>=75?['cr','Señal fuerte']:o.sc>=60?['wa','Vigilar']:['ne','Sin señal'];
+    return `<tr><td><strong>${o.n}</strong></td><td class="note" style="white-space:nowrap">${o.m}</td><td style="min-width:280px">${o.h}</td>
+    <td class="r"><div class="score" style="justify-content:flex-end"><span class="meter"><i style="width:${o.sc}%"></i></span><span class="num">${fmt(o.sc,0)}</span></div></td>
+    <td><span class="pill ${c}">${t}</span></td><td class="note" style="min-width:220px">${o.x}</td></tr>`}).join('');
+}
+$('#weights').innerHTML=VARS.map(v=>`<label for="w-${v[0]}">${v[1]} <output id="o-${v[0]}"></output><input type="range" id="w-${v[0]}" min="0" max="50" step="5" value="${v[2]}"></label>`).join('')+'<button class="btn" id="wreset" style="align-self:end">Pesos originales</button>';
+VARS.forEach(v=>document.getElementById('w-'+v[0]).addEventListener('input',e=>{W[v[0]]=+e.target.value;renderRank();}));
+$('#wreset').addEventListener('click',()=>{VARS.forEach(v=>{W[v[0]]=v[2];document.getElementById('w-'+v[0]).value=v[2];});renderRank();});
+renderRank();
+
+function alertaInv(){
+  const L=OPP.map(o=>({...o,sc:scoreOf(o)}));
+  const buy=L.filter(o=>o.dir==='comprar'&&o.sc>=60).sort((a,b)=>b.sc-a.sc);
+  const avoid=L.filter(o=>o.dir==='evitar'&&o.sc>=75).sort((a,b)=>b.sc-a.sc);
+  const dep=D.plazos_bce[5][1], ust=last('ust10');
+  const nivel=buy.some(o=>o.sc>=75)?'fuerte':buy.length?'moderada':'sin';
+  const items=[];
+  buy.forEach(o=>items.push({k:o.sc>=75?'Comprar':'Invertir poco a poco',t:o.n+' ('+fmt(o.sc,0)+'/100)',d:o.h.split('. ')[0]+'.',perf:o.pf.length===3?'todos los perfiles':'perfil '+o.pf.join(' y '),c:'up'}));
+  items.push({k:'Renta segura',t:'Depósito a plazo 361+ días al '+fmt(dep)+'% o Tesoro EE.UU. 10 años al '+fmt(ust)+'%',d:'Rendimiento conocido para la parte conservadora de cualquier cartera.',perf:'todos los perfiles',c:'up'});
+  avoid.forEach(o=>items.push({k:'Evitar',t:o.n+' ('+fmt(o.sc,0)+'/100)',d:o.h.split('. ')[0]+'.',perf:'todos los perfiles',c:'down'}));
+  const tit=nivel==='fuerte'?'Alerta fuerte: oportunidad para invertir hoy':nivel==='moderada'?'Alerta de inversión: oportunidad moderada hoy':'Sin oportunidad nueva hoy: mantener la cartera base';
+  return {nivel,tit,items};
+}
+function renderAlerta(){
+  const A=alertaInv(); const html=`<span class="tit">${A.tit}</span><ul>${A.items.map(i=>`<li><b class="k" style="color:var(--${i.c})">${i.k}</b><span><strong>${i.t}</strong> · ${i.d} <span class="note">(${i.perf})</span></span></li>`).join('')}</ul>`;
+  ['alertaInv','alertaInv2'].forEach(id=>{const e=document.getElementById(id); if(e){e.className='alerta'+(A.nivel==='fuerte'?' fuerte':''); e.innerHTML=html;}});
+}
+function renderRecos(){
+  const el=document.getElementById('recoRows'); if(!el) return;
+  const k=perfilSel, P=PERF[k];
+  const base=`<tr><td><span class="act" style="color:var(--accent)">Base</span></td><td><strong>Cartera ${{conservador:'conservadora',moderado:'moderada',agresivo:'agresiva'}[k]}</strong><small>${Object.entries(P.a).map(([i,w])=>w+'% '+INS[i].n.split(' (')[0]).join(' · ')}</small></td><td class="r num">—</td><td>${P.d}</td><td class="note">Revisar cada mes o si cambia su perfil.</td></tr>`;
+  const rows=OPP.map(o=>({...o,sc:scoreOf(o)})).filter(o=>o.pf.includes(k)).sort((a,b)=>b.sc-a.sc).map(o=>{
+    let a,c;
+    if(o.dir==='comprar'){ if(o.sc>=75){a='Comprar';c='var(--up)'} else if(o.sc>=60){a='Incrementar poco a poco';c='var(--up)'} else {a='Mantener';c='var(--muted)'} }
+    else { if(o.sc>=75){a='Evitar / reducir';c='var(--down)'} else if(o.sc>=60){a='Subponderar';c='var(--warn)'} else {a='No invertir';c='var(--muted)'} }
+    return `<tr><td><span class="act" style="color:${c}">${a}</span></td><td><strong>${o.n}</strong><small>${o.m}</small></td><td class="r num">${fmt(o.sc,0)}</td><td style="min-width:260px">${o.h}</td><td class="note" style="min-width:200px">${o.x}</td></tr>`;}).join('');
+  el.innerHTML=base+rows;
+  renderAlerta();
+}
+renderPerf();
+
+const V=D.valuacion;
+const AL=[
+  ['cr',fmt(V.margin_tn)+' bn','Deuda en margen récord','Los inversionistas de EE.UU. deben USD 1,50 billones prestados para comprar acciones (récord de junio; 1,45 en agosto). Una caída fuerte dispara llamadas de margen y ventas forzadas.'],
+  ['cr',fmt(V.cape,1)+'x','Valuación en percentil '+fmt(V.cape_pct,1),'El CAPE solo fue más alto en 1999-2000. La prima de las acciones sobre los bonos es apenas '+fmt(V.ecy)+' puntos, cerca de su mínimo.'],
+  [last('vix')>=17?'wa':'ok',fmt(last('vix')),'VIX','Subió 35% la semana del 16-oct (19,99) y bajó a 16,68 el 21-oct. La venta del 22-oct probablemente lo elevó; confirmar con el dato oficial.'],
+  ['wa',fmt(last('hy'))+'%','Spread high yield','Comprimido: si el crédito se abre de golpe, los fondos apalancados venden a la vez. Vigilar cruce de 3,77% (máximo de 52 semanas).'],
+  ['cr',fmt(last('rp'),0)+' pb','Riesgo país Ecuador','Máximo del año. Encarece el financiamiento externo del Estado y de empresas locales; presiona tasas internas.'],
+  ['wa','28-oct','Decisión de la Fed','El mercado descuenta otra alza de 25 pb en 2026. Una sorpresa al alza golpearía bonos y acciones a la vez.']
+];
+$('#alerts').innerHTML=AL.map(a=>`<div class="alert"><span class="num">${a[1]}</span><div><strong>${a[2]}</strong><p class="note" style="margin-top:2px">${a[3]}</p></div><span class="pill ${a[0]}">${a[0]==='cr'?'Crítico':a[0]==='wa'?'Atención':'Normal'}</span></div>`).join('');
+
+/* ===== NOTIFICACIÓN ===== */
+(function(){
+  const c=k=>changes(k), top=OPP.map(o=>({...o,sc:scoreOf(o)})).sort((a,b)=>b.sc-a.sc).slice(0,3);
+  $('#nCorte').textContent=D.corte.split('-').reverse().join('/'); $('#nGen').textContent='Generado '+D.generado;
+  const A=alertaInv();
+  $('#nPrev').textContent=`Asunto: Observatorio de Inversión MERPAZ - cierre ${D.corte.split('-').reverse().join('/')}
+Para: dmerchan.dmp@gmail.com
+Adjunto: Reporte_MERPAZ_${D.corte}.pdf
+
+${A.tit.toUpperCase()}
+${A.items.map(i=>`- ${i.k}: ${i.t}. ${i.d}`).join('\n')}
+
+S&P 500 ${fmt(last('sp500'))} (${sign(c('sp500').dia)}%)  ·  Nasdaq ${fmt(last('nasdaq'))} (${sign(c('nasdaq').dia)}%)
+Tesoro 10 años ${fmt(last('ust10'))}%  ·  Oro ${fmt(last('oro'),0)}  ·  Brent ${fmt(last('brent'))}
+Riesgo país Ecuador ${fmt(last('rp'),0)} pb  ·  Depósito 361+ días 6,21%
+
+SDIRM top 3:
+${top.map((o,i)=>`${i+1}. ${o.n}: ${fmt(o.sc,0)}/100`).join('\n')}
+
+Información referencial, no constituye asesoría financiera.`;
+})();
+
+/* ===== pestañas ===== */
+const views=['variaciones','sdirm','recomendacion','notificacion'];
+function show(v){ if(!views.includes(v)) v='variaciones';
+  views.forEach(x=>{document.getElementById('v-'+x).hidden=x!==v; document.getElementById('t-'+x).setAttribute('aria-selected',x===v);});
+  try{ if(location.hash!=='#'+v) history.replaceState(null,'','#'+v);}catch(e){}
+}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.v)));
+show((location.hash||'').slice(1));
+</script>
+<div id="appbar" hidden><span id="appmsg"></span><button id="appupd" hidden>Actualizar</button></div>
+<script>
+(function(){var bar=document.getElementById('appbar'),msg=document.getElementById('appmsg'),up=document.getElementById('appupd');
+function show(t,b){msg.textContent=t;bar.hidden=false;up.hidden=!b;}
+if(!('serviceWorker' in navigator)){return;}
+navigator.serviceWorker.register('sw.js').then(function(reg){
+  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261023-1100');setTimeout(function(){bar.hidden=true},5000);});
+  reg.addEventListener('updatefound',function(){var w=reg.installing;w&&w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller){show('Nueva versión disponible',true);up.onclick=function(){w.postMessage('skip');};}});});
+  reg.update();
+}).catch(function(){});
+navigator.serviceWorker.addEventListener('controllerchange',function(){location.reload();});
+window.addEventListener('offline',function(){show('Sin conexión · mostrando el último reporte guardado');});
+window.addEventListener('online',function(){bar.hidden=true;});
+})();
+</script></body></html>
