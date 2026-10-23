@@ -32,9 +32,14 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:
 header{display:flex;flex-wrap:wrap;align-items:center;gap:24px}
 .ring{width:112px;height:112px;flex:none;position:relative}
 .ring svg{width:100%;height:100%}
-.ring .spin{transform-origin:56px 56px;animation:spin 14s linear infinite}
+.ring{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ring .spin,.ring .spin2{transform-box:fill-box;transform-origin:50% 50%;-webkit-transform-origin:50% 50%;will-change:transform}
+.ring .spin{animation:spin 14s linear infinite}
+.ring .spin2{animation:spin 22s linear infinite reverse}
+.ring.fast .spin{animation-duration:1.2s}.ring.fast .spin2{animation-duration:2s}
+.ring.fast b span{box-shadow:0 0 18px rgba(34,211,238,.6)}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.ring .spin{animation:none}}
+@media (prefers-reduced-motion:reduce){.ring .spin{animation-duration:40s}.ring .spin2{animation-duration:60s}}
 .ring b{position:absolute;inset:0;display:grid;place-items:center}
 .ring b span{font:700 22px var(--display);letter-spacing:.04em;color:var(--accent);border:2px solid var(--accent);padding:2px 7px;line-height:1.1}
 .seal{width:64px;height:64px;border:3px solid var(--ink);display:grid;place-items:center;flex:none}
@@ -195,11 +200,11 @@ footer a{color:var(--accent)}
 
 <div class="wrap">
   <header>
-    <div class="ring" aria-hidden="true">
+    <div class="ring" id="ring" role="button" tabindex="0" aria-label="Activar anillo">
       <svg viewBox="0 0 112 112">
         <circle cx="56" cy="56" r="52" fill="none" stroke="#15405a" stroke-width="1"/>
         <g class="spin"><circle cx="56" cy="56" r="44" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="40 14 8 14"/></g>
-        <circle cx="56" cy="56" r="34" fill="none" stroke="#22d3ee" stroke-opacity=".35" stroke-width="6" stroke-dasharray="2 4"/>
+        <g class="spin2"><circle cx="56" cy="56" r="34" fill="none" stroke="#22d3ee" stroke-opacity=".35" stroke-width="6" stroke-dasharray="2 4"/></g>
       </svg>
       <b><span>MP</span></b>
     </div>
@@ -625,6 +630,11 @@ ${top.map((o,i)=>`${i+1}. ${o.n}: ${fmt(o.sc,0)}/100`).join('\n')}
 Información referencial, no constituye asesoría financiera.`;
 })();
 
+/* ===== anillo interactivo ===== */
+(function(){const g=document.getElementById('ring'); if(!g) return; let t;
+ const go=()=>{g.classList.add('fast'); clearTimeout(t); t=setTimeout(()=>g.classList.remove('fast'),2500); try{navigator.vibrate&&navigator.vibrate(15)}catch(e){}};
+ g.addEventListener('click',go); g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});})();
+
 /* ===== pestañas ===== */
 const views=['variaciones','sdirm','recomendacion','notificacion'];
 function show(v){ if(!views.includes(v)) v='variaciones';
@@ -640,7 +650,7 @@ show((location.hash||'').slice(1));
 function show(t,b){msg.textContent=t;bar.hidden=false;up.hidden=!b;}
 if(!('serviceWorker' in navigator)){return;}
 navigator.serviceWorker.register('sw.js').then(function(reg){
-  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261023-1100');setTimeout(function(){bar.hidden=true},5000);});
+  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261023-1130');setTimeout(function(){bar.hidden=true},5000);});
   reg.addEventListener('updatefound',function(){var w=reg.installing;w&&w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller){show('Nueva versión disponible',true);up.onclick=function(){w.postMessage('skip');};}});});
   reg.update();
 }).catch(function(){});
