@@ -171,8 +171,8 @@ footer a{color:var(--accent)}
 <script id="datos" type="application/json">
 {
  "corte": "2026-10-23",
- "generado": "2026-10-26 08:20 (hora Ecuador)",
- "contexto": "El viernes 23 la bolsa cerró una semana irregular: el Dow cayó 1,23% por la venta en telecomunicaciones y financieras, mientras la tecnología se estabilizó tras la caída del jueves. El petróleo siguió subiendo por ataques en Arabia Saudita: Brent cerró en USD 116,72 (+3,1%) y el sector energía marcó récord. El rendimiento a 10 años volvió a 5,00% y el VIX subió a 19,45. En Ecuador el riesgo país llegó a 587 puntos, nuevo máximo del año. Esta semana: decisión de la Fed el miércoles 28 (se espera que mantenga la tasa) y resultados de Alphabet, Microsoft y Amazon.",
+ "generado": "2026-10-26 08:35 (hora Ecuador)",
+ "contexto": "Sin cierre nuevo desde el viernes 23: Wall Street abre hoy lunes 26 a las 08:30 de Ecuador. El viernes el Dow cayó 1,23%, aunque sumó su tercera semana de alza (+0,4%), mientras el S&P 500 (-0,5% en la semana) y el Nasdaq (-0,7%) cerraron la semana en rojo. El petróleo siguió subiendo por la tensión con Irán en el Golfo: Brent en USD 116,72 y WTI en 103,27; el oro bajó a cerca de 4.008 y el Tesoro a 10 años volvió a 5,00%. En Ecuador el riesgo país quedó en 587 pb, máximo del año. Esta semana: decisión de la Fed el miércoles 28 (se espera que mantenga la tasa) y resultados de Alphabet, Microsoft y Amazon.",
  "series": {
   "sp500": {
    "n": "S&P 500",
@@ -1334,7 +1334,7 @@ show((location.hash||'').slice(1));
 function show(t,b){msg.textContent=t;bar.hidden=false;up.hidden=!b;}
 if(!('serviceWorker' in navigator)){return;}
 navigator.serviceWorker.register('sw.js').then(function(reg){
-  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261026-0840');setTimeout(function(){bar.hidden=true},5000);});
+  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261026-0845');setTimeout(function(){bar.hidden=true},5000);});
   reg.addEventListener('updatefound',function(){var w=reg.installing;w&&w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller){show('Nueva versión disponible',true);up.onclick=function(){w.postMessage('skip');};}});});
   reg.update();
 }).catch(function(){});
