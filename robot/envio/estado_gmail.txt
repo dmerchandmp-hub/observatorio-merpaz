@@ -1,0 +1,5 @@
+Fecha y hora: 2026-10-28 14:44:14 UTC
+Herramientas Gmail encontradas: ninguna (ToolSearch "gmail" y select:mcp__Gmail__* sin resultados)
+Herramienta usada: ninguna
+Resultado: error - el conector Gmail necesita reconectarse (su inicio de sesión guardado ya no es válido), por eso sus herramientas no estaban disponibles en esta ejecución. No se envió correo ni se creó borrador.
+Archivos listos: robot/envio/Reporte_MERPAZ_2026-10-28.pdf, robot/envio/correo.html
