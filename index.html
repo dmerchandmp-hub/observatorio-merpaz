@@ -171,9 +171,9 @@ footer a{color:var(--accent)}
 
 <script id="datos" type="application/json">
 {
- "corte": "2026-10-26",
- "generado": "2026-10-27 08:04 (hora Ecuador)",
- "contexto": "El lunes 26 Wall Street rebotó: el S&P 500 subió 0,70% a 7.676,80, el Nasdaq 0,82% a 26.169,38 y el Dow 0,28%, impulsados por el anuncio de salida a bolsa de Anthropic, que reanimó el optimismo por la inteligencia artificial; Meta, en cambio, cayó al anunciar que levantará hasta USD 95 mil millones para invertir en IA. El petróleo cedió por las conversaciones diplomáticas en Teherán (Brent 115,95; WTI 101,82), aunque el paso por Ormuz sigue muy restringido; el VIX bajó a 18,39, el Tesoro a 10 años quedó en 4,98% y el oro se mantuvo cerca de 4.000. En Ecuador el riesgo país sigue en 587 pb, máximo del año (último dato BCE). Próximo evento: la Fed decide mañana miércoles 28 (el mercado da ~10% de probabilidad a un alza) y reportan Microsoft y Alphabet ese día, y Amazon el jueves.",
+ "corte": "2026-10-27",
+ "generado": "2026-10-28 07:55 (hora Ecuador)",
+ "contexto": "El martes 27 la tecnología volvió a liderar: el S&P 500 subió 0,60% a 7.722,60, el Nasdaq 1,18% a 26.477,81 y el Dow apenas 0,03% a 52.377,57; la solicitud de salida a bolsa de Anthropic impulsó a los semiconductores (+3,6%), mientras Boeing cayó ~10% al recortar entregas y Coca-Cola bajó 1,6% pese a superar estimaciones. El petróleo cedió por las conversaciones de paz en Medio Oriente (Brent 113,88; WTI 99,90, bajo 100 por primera vez desde el 22-oct), aunque los ataques hutíes a la refinería saudí de Ras Tanura mantienen el riesgo de oferta; el VIX bajó a 17,52, el oro subió a 4.073 y el Tesoro a 10 años quedó en 5,00%. En Ecuador el riesgo país sigue en 587 pb (BCE, 27-oct), en su máximo del año, y el bono 2035 cayó a 81,66. Hoy miércoles 28 la Fed anuncia su decisión a las 13:00 hora Ecuador (se espera que mantenga la tasa, con atención a una posible alza en diciembre) y reportan Microsoft y Alphabet tras el cierre.",
  "series": {
   "sp500": {
    "n": "S&P 500",
@@ -183,15 +183,17 @@ footer a{color:var(--accent)}
    "fechas": [
     "10-22",
     "10-23",
-    "10-26"
+    "10-26",
+    "10-27"
    ],
    "v": [
     7663.43,
     7623.68,
-    7676.8
+    7676.8,
+    7722.6
    ],
-   "dia": 0.7,
-   "ytd": 14.52,
+   "dia": 0.6,
+   "ytd": 15.2,
    "fuente": "TheStreet / Saxo"
   },
   "nasdaq": {
@@ -203,16 +205,18 @@ footer a{color:var(--accent)}
     "10-06",
     "10-22",
     "10-23",
-    "10-26"
+    "10-26",
+    "10-27"
    ],
    "v": [
     27599.89,
     26008.86,
     25955.34,
-    26169.38
+    26169.38,
+    26477.81
    ],
-   "dia": 0.82,
-   "ytd": 14.3,
+   "dia": 1.18,
+   "ytd": 15.65,
    "nota": "Máximo histórico 27.599,89 el 6-oct",
    "fuente": "TheStreet / Saxo"
   },
@@ -224,15 +228,17 @@ footer a{color:var(--accent)}
    "fechas": [
     "10-22",
     "10-23",
-    "10-26"
+    "10-26",
+    "10-27"
    ],
    "v": [
     52867.98,
     52215.16,
-    52361.52
+    52361.52,
+    52377.57
    ],
-   "dia": 0.28,
-   "ytd": 13.44,
+   "dia": 0.03,
+   "ytd": 13.47,
    "fuente": "TheStreet / Saxo"
   },
   "ust10": {
@@ -256,7 +262,8 @@ footer a{color:var(--accent)}
     "10-21",
     "10-22",
     "10-23",
-    "10-26"
+    "10-26",
+    "10-27"
    ],
    "v": [
     5.23,
@@ -274,7 +281,8 @@ footer a{color:var(--accent)}
     5.13,
     4.95,
     5.0,
-    4.98
+    4.98,
+    5.0
    ],
    "tipo": "tasa",
    "fuente": "FRED DGS10 / TheStreet / Saxo"
@@ -306,7 +314,8 @@ footer a{color:var(--accent)}
     "10-20",
     "10-21",
     "10-22",
-    "10-23"
+    "10-23",
+    "10-26"
    ],
    "v": [
     3.23,
@@ -315,10 +324,11 @@ footer a{color:var(--accent)}
     3.33,
     3.27,
     3.4,
-    3.38
+    3.38,
+    3.3
    ],
    "tipo": "riesgo",
-   "nota": "Promedio desde 1996: 5,16%. Último dato FRED: 23-oct",
+   "nota": "Promedio desde 1996: 5,16%. Último dato FRED: 26-oct",
    "fuente": "FRED BAMLH0A0HYM2"
   },
   "vix": {
@@ -334,7 +344,8 @@ footer a{color:var(--accent)}
     "10-21",
     "10-22",
     "10-23",
-    "10-26"
+    "10-26",
+    "10-27"
    ],
    "v": [
     16.46,
@@ -344,11 +355,12 @@ footer a{color:var(--accent)}
     16.68,
     19.03,
     19.45,
-    18.39
+    18.39,
+    17.52
    ],
    "tipo": "riesgo",
-   "nota": "Cierre 26-oct (-5,45%) según Saxo; FRED publica hasta el 23-oct",
-   "fuente": "FRED VIXCLS / Saxo"
+   "nota": "Cierre 27-oct (-4,73%) según Capp Notes; FRED publica con rezago",
+   "fuente": "FRED VIXCLS / Capp Notes"
   },
   "oro": {
    "n": "Oro (futuro dic.)",
@@ -372,7 +384,8 @@ footer a{color:var(--accent)}
     "10-21",
     "10-22",
     "10-23",
-    "10-26"
+    "10-26",
+    "10-27"
    ],
    "v": [
     4202.3,
@@ -391,10 +404,11 @@ footer a{color:var(--accent)}
     4150.0,
     4046.8,
     4008.0,
-    4028.0
+    4028.0,
+    4073.1
    ],
-   "fuente": "Investing.com / Top1Markets",
-   "nota": "26-oct estimado: futuro de dic. ajustado por la variación del oro spot (3.997 a 4.016,97, +0,5%)"
+   "fuente": "Investing.com / Capp Notes",
+   "nota": "Cierre 27-oct +0,86% (Capp Notes)"
   },
   "wti": {
    "n": "Petróleo WTI",
@@ -405,16 +419,18 @@ footer a{color:var(--accent)}
     "10-05",
     "10-22",
     "10-23",
-    "10-26"
+    "10-26",
+    "10-27"
    ],
    "v": [
     89.43,
     99.09,
     103.27,
-    101.82
+    101.82,
+    99.9
    ],
-   "dia": -1.39,
-   "fuente": "DTN / Capp Notes"
+   "dia": -1.83,
+   "fuente": "Capp Notes"
   },
   "brent": {
    "n": "Petróleo Brent",
@@ -424,16 +440,18 @@ footer a{color:var(--accent)}
    "fechas": [
     "10-22",
     "10-23",
-    "10-26"
+    "10-26",
+    "10-27"
    ],
    "v": [
     112.91,
     116.72,
-    115.95
+    115.95,
+    113.88
    ],
-   "dia": -1.61,
-   "nota": "Bajó USD 1,90 por diálogo en Teherán; seis meses en máximos",
-   "fuente": "DTN / Rio Times"
+   "dia": -1.67,
+   "nota": "Bajó por las conversaciones de paz en Medio Oriente; ataques hutíes a Ras Tanura mantienen el riesgo de oferta",
+   "fuente": "Capp Notes / Nation Thailand"
   },
   "btc": {
    "n": "Bitcoin",
@@ -443,16 +461,18 @@ footer a{color:var(--accent)}
    "fechas": [
     "10-22",
     "10-23",
-    "10-26"
+    "10-26",
+    "10-27"
    ],
    "v": [
     81300,
     81230,
-    79640
+    79640,
+    80624
    ],
-   "dia": -1.96,
-   "fuente": "Saxo / Capp Notes",
-   "nota": "Aproximado (madrugada del 27-oct, Saxo)"
+   "dia": 1.0,
+   "fuente": "Capp Notes",
+   "nota": "Aproximado al cierre de Wall Street del 27-oct (Capp Notes)"
   },
   "rp": {
    "n": "Riesgo país Ecuador (EMBI)",
@@ -467,7 +487,8 @@ footer a{color:var(--accent)}
     "10-19",
     "10-20",
     "10-21",
-    "10-23"
+    "10-23",
+    "10-27"
    ],
    "v": [
     414.72,
@@ -477,10 +498,11 @@ footer a{color:var(--accent)}
     556.4,
     575,
     570.45,
-    587.06
+    587.06,
+    586.52
    ],
    "tipo": "riesgo",
-   "nota": "Máximo de 2026. Último dato BCE: 23-oct (publicado 25-oct). Hace un año: cerca de 813 pb",
+   "nota": "Máximo de 2026 en 587 pb (23-oct). Último dato BCE: 27-oct. Hace un año: cerca de 813 pb",
    "fuente": "Banco Central del Ecuador"
   },
   "ec2030": {
@@ -491,14 +513,16 @@ footer a{color:var(--accent)}
    "fechas": [
     "10-20",
     "10-22",
-    "10-23"
+    "10-23",
+    "10-26"
    ],
    "v": [
     96.98,
     97.28,
-    97.27
+    97.27,
+    97.06
    ],
-   "fuente": "BCE"
+   "fuente": "BCE (último dato 26-oct)"
   },
   "ec2034": {
    "n": "Bono Ecuador 2034",
@@ -508,14 +532,16 @@ footer a{color:var(--accent)}
    "fechas": [
     "10-20",
     "10-22",
-    "10-23"
+    "10-23",
+    "10-26"
    ],
    "v": [
     90.87,
     90.94,
-    91.0
+    91.0,
+    90.15
    ],
-   "fuente": "BCE"
+   "fuente": "BCE (último dato 26-oct)"
   },
   "ec2035": {
    "n": "Bono Ecuador 2035",
@@ -525,14 +551,16 @@ footer a{color:var(--accent)}
    "fechas": [
     "10-20",
     "10-22",
-    "10-23"
+    "10-23",
+    "10-26"
    ],
    "v": [
     82.26,
     82.2,
-    82.18
+    82.18,
+    81.66
    ],
-   "fuente": "BCE"
+   "fuente": "BCE (último dato 26-oct)"
   },
   "ec2039": {
    "n": "Bono Ecuador 2039",
@@ -542,14 +570,16 @@ footer a{color:var(--accent)}
    "fechas": [
     "10-20",
     "10-22",
-    "10-23"
+    "10-23",
+    "10-26"
    ],
    "v": [
     88.76,
     88.86,
-    88.8
+    88.8,
+    88.2
    ],
-   "fuente": "BCE"
+   "fuente": "BCE (último dato 26-oct)"
   },
   "ec2040": {
    "n": "Bono Ecuador 2040",
@@ -559,14 +589,16 @@ footer a{color:var(--accent)}
    "fechas": [
     "10-20",
     "10-22",
-    "10-23"
+    "10-23",
+    "10-26"
    ],
    "v": [
     71.64,
     71.64,
-    71.67
+    71.67,
+    71.11
    ],
-   "fuente": "BCE"
+   "fuente": "BCE (último dato 26-oct)"
   },
   "tpr": {
    "n": "Tasa pasiva referencial BCE",
@@ -656,13 +688,13 @@ footer a{color:var(--accent)}
    "n": "Johnson & Johnson",
    "sec": "Salud",
    "pais": "EE.UU.",
-   "precio": 266.25,
+   "precio": 266.3,
    "fp": "26-oct",
    "div": 2.01,
    "crec": 3.1,
    "racha": "64 años subiendo dividendo",
    "pe": "≈29 histórico",
-   "dato": "Una de las pocas empresas con calificación AAA; +29,5% en 2026",
+   "dato": "Una de las pocas empresas con calificación AAA; Reino Unido aprobó su píldora oral para psoriasis",
    "riesgo": "Ventas de Stelara cayeron 55,7% por genéricos",
    "s": {
     "sol": 95,
@@ -677,14 +709,14 @@ footer a{color:var(--accent)}
    "n": "Coca-Cola",
    "sec": "Consumo básico",
    "pais": "EE.UU.",
-   "precio": 92.52,
-   "fp": "26-oct",
-   "div": 2.2,
+   "precio": 91.0,
+   "fp": "27-oct (estim.)",
+   "div": 2.33,
    "crec": 3.9,
    "racha": "Más de 60 años subiendo dividendo",
    "pe": "≈26 histórico",
-   "dato": "Dividendo de 0,16 USD en 1999 a 0,53 USD hoy; +35,2% en 2026",
-   "riesgo": "Litigio tributario con el IRS",
+   "dato": "Tercer trimestre superó estimaciones y elevó su guía 2026; dividendo de 0,16 USD en 1999 a 0,53 USD hoy",
+   "riesgo": "Cayó 1,6% el 27-oct pese a buenos resultados; litigio tributario con el IRS",
    "s": {
     "sol": 90,
     "div": 90,
@@ -788,7 +820,7 @@ footer a{color:var(--accent)}
    "crec": 4.0,
    "racha": "Más de 40 años subiendo dividendo",
    "pe": "—",
-   "dato": "+55,3% en 2026 con Brent sobre 115",
+   "dato": "+55% en 2026 con Brent sobre 110; el sector energía cayó 2% el 27-oct",
    "riesgo": "Muy ligada al precio del petróleo; cae fuerte si baja el crudo",
    "s": {
     "sol": 85,
@@ -1153,13 +1185,13 @@ $('#charts').innerHTML=['ust10','oro','rp','vix','hy'].map(lineChart).join('');
 const INS = {
   dep:  {n:'Depósito a plazo Ecuador (181 a 361+ días)', r:'Conservador', y:5.6, beta:0, why:'BCE oct-26: 4,96% a 181-360 días y 6,21% a 361+. Elegir banco con buena calificación.', ytxt:'4,96% – 6,21%'},
   tb:   {n:'Letras del Tesoro EE.UU. (T-bills, 3 a 12 meses)', r:'Conservador', y:D.tbills['13s'], beta:0, why:'Liquidez y riesgo soberano de EE.UU. La letra a 52 semanas rinde '+fmt(D.tbills['52s'])+'%, más que el dividendo de cualquier empresa sólida.', ytxt:fmt(D.tbills['13s'])+'% – '+fmt(D.tbills['52s'])+'%'},
-  ust:  {n:'Bono del Tesoro EE.UU. 10 años', r:'Conservador', y:last('ust10'), beta:-0.15, why:'4,98% cerca de máximos de dos décadas; sube de precio cuando la bolsa cae (refugio del 22-oct). La Fed decide el 28-oct.', ytxt:fmt(last('ust10'))+'%'},
+  ust:  {n:'Bono del Tesoro EE.UU. 10 años', r:'Conservador', y:last('ust10'), beta:-0.15, why:'5,00% cerca de máximos de dos décadas; sube de precio cuando la bolsa cae (refugio del 22-oct). La Fed decide hoy 28-oct.', ytxt:fmt(last('ust10'))+'%'},
   def:  {n:'Acciones defensivas / S&P 500 igual ponderado', r:'Moderado', y:null, beta:0.7, why:'Consumo básico y salud resistieron la venta tecnológica; menos exposición a megacaps de IA.', ytxt:'variable'},
   spx:  {n:'Índice S&P 500 (ETF amplio)', r:'Agresivo', y:null, beta:1.0, why:'CAPE 40,7, percentil 98,9 desde 1881: valuación extrema, entrar escalonado.', ytxt:'variable'},
-  oro:  {n:'Oro', r:'Moderado', y:null, beta:0.1, why:'Se sostiene cerca de 4.000 (spot 4.016,97 el 26-oct), sobre el soporte de 3.950; protege ante inflación por petróleo, pero sufre con tasas altas.', ytxt:fmt(last('oro'),0)+' USD/oz'},
-  ec30: {n:'Bono soberano Ecuador 2030', r:'Moderado', y:null, beta:0.5, why:'Cotiza a 97,27 (cerca de la par); vencimiento corto con riesgo país en 587 pb.', ytxt:'precio 97,27'},
-  ec35: {n:'Bono soberano Ecuador 2035', r:'Agresivo', y:null, beta:0.6, why:'Cotiza a 82,18: descuento amplio. Gana si el riesgo país vuelve hacia 415 pb (nivel de 1-sep).', ytxt:'precio 82,18'},
-  ene:  {n:'Sector energía', r:'Agresivo', y:null, beta:0.8, why:'Brent bajó a 115,95 el 26-oct por el diálogo con Irán, pero Ormuz sigue restringido; alto beneficio de corto plazo, muy volátil.', ytxt:'variable'}
+  oro:  {n:'Oro', r:'Moderado', y:null, beta:0.1, why:'Rebotó a 4.073 el 27-oct (+0,9%), sobre el soporte de 3.950; protege ante inflación por petróleo, pero sufre con tasas altas.', ytxt:fmt(last('oro'),0)+' USD/oz'},
+  ec30: {n:'Bono soberano Ecuador 2030', r:'Moderado', y:null, beta:0.5, why:'Cotiza a 97,06 (cerca de la par); vencimiento corto con riesgo país en 587 pb.', ytxt:'precio 97,06'},
+  ec35: {n:'Bono soberano Ecuador 2035', r:'Agresivo', y:null, beta:0.6, why:'Cotiza a 81,66: descuento amplio. Gana si el riesgo país vuelve hacia 415 pb (nivel de 1-sep).', ytxt:'precio 81,66'},
+  ene:  {n:'Sector energía', r:'Agresivo', y:null, beta:0.8, why:'Brent bajó a 113,88 el 27-oct por las conversaciones de paz, pero Ormuz sigue restringido y los hutíes atacaron Ras Tanura; el sector cayó 2% en el día, muy volátil.', ytxt:'variable'}
 };
 const PERF = {
   conservador:{t:'Conservador',d:'Preservar capital y cobrar una renta conocida. Horizonte de 6 a 12 meses.',a:{dep:45,tb:35,ust:15,oro:5}},
@@ -1232,12 +1264,12 @@ renderCalc();
 const VARS=[['gap','Diferencia valor estimado vs precio',30],['det','Deterioro o riesgo no reconocido',25],['evi','Evidencia verificable',20],['cat','Catalizadores',15],['liq','Liquidez y ejecución',10]];
 const W={}; VARS.forEach(v=>W[v[0]]=v[2]);
 const OPP=[
-  {n:'Megacaps de IA / Nasdaq',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Burbuja',h:'Precio descuenta retornos de la inversión en IA que el flujo de caja aún no muestra. Meta levantará hasta USD 95 mil millones en acciones para financiar IA y el anuncio de salida a bolsa de Anthropic reanimó la euforia el 26-oct. CAPE del mercado 40,7.',s:{gap:85,det:75,evi:70,cat:80,liq:95},x:'Invalidar si el Nasdaq recupera su máximo de 27.600 o si el flujo libre de las megacaps vuelve a crecer dos trimestres seguidos.'},
-  {n:'Bono del Tesoro EE.UU. 10 años',dir:'comprar',pf:['conservador','moderado','agresivo'],m:'Oportunidad defensiva',h:'Rinde 4,98% tras tocar 5,36%. Si la desaceleración tecnológica se extiende, el bono gana precio como el 22-oct. La Fed decide mañana 28-oct (≈10% de probabilidad de alza).',s:{gap:70,det:60,evi:75,cat:70,liq:100},x:'Salir o reducir si el rendimiento cierra sobre 5,30% (la Fed sube más de lo previsto).'},
-  {n:'Crédito high yield (bonos basura)',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Riesgo ignorado',h:'Spread de 3,38% (23-oct) frente a un promedio histórico de 5,16%, con tasas de 5% y Brent sobre 116. El mercado cobra poco por el riesgo de impago.',s:{gap:75,det:68,evi:62,cat:62,liq:70},x:'Señal pierde fuerza si la Fed recorta tasas o si el spread ya supera 4,5%.'},
-  {n:'Bono soberano Ecuador 2035',dir:'comprar',pf:['agresivo'],m:'Oportunidad castigada',h:'Precio 82,18 con riesgo país en 587 pb, 172 pb más que el 1-sep. Si el riesgo vuelve hacia 450 pb el bono se revaloriza.',s:{gap:75,det:60,evi:55,cat:55,liq:45},x:'Cortar pérdida si el riesgo país supera 700 pb o se retrasa una revisión del FMI.'},
-  {n:'Oro tras la corrección',dir:'comprar',pf:['moderado','agresivo'],m:'Oportunidad táctica',h:'Cayó de 4.216 (9-oct) a ~4.008 y rebotó a ~4.028 el 26-oct. La inflación por petróleo lo apoya; tasas cerca de 5% lo frenan. Aún cerca de su nivel de salida.',s:{gap:45,det:40,evi:50,cat:55,liq:90},x:'Salir si cierra bajo 3.950 USD/oz.'},
-  {n:'Bitcoin',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Activo especulativo',h:'Bajó a ~79.640 (-2%) pese al rebote de las acciones tecnológicas; sin flujo de caja que ancle el valor.',s:{gap:40,det:50,evi:35,cat:45,liq:85},x:'No aplica en perfiles conservador y moderado.'}
+  {n:'Megacaps de IA / Nasdaq',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Burbuja',h:'Precio descuenta retornos de la inversión en IA que el flujo de caja aún no muestra. La salida a bolsa de Anthropic llevó al Nasdaq a subir 1,2% y a los semiconductores 3,6% el 27-oct; Meta levantará hasta USD 95 mil millones para financiar IA. Hoy reportan Microsoft y Alphabet. CAPE del mercado 40,7.',s:{gap:86,det:75,evi:70,cat:82,liq:95},x:'Invalidar si el Nasdaq recupera su máximo de 27.600 o si el flujo libre de las megacaps vuelve a crecer dos trimestres seguidos.'},
+  {n:'Bono del Tesoro EE.UU. 10 años',dir:'comprar',pf:['conservador','moderado','agresivo'],m:'Oportunidad defensiva',h:'Rinde 5,00% tras tocar 5,36%. Si la desaceleración tecnológica se extiende, el bono gana precio como el 22-oct. La Fed decide hoy 28-oct; se espera que mantenga la tasa.',s:{gap:70,det:60,evi:75,cat:70,liq:100},x:'Salir o reducir si el rendimiento cierra sobre 5,30% (la Fed sube más de lo previsto).'},
+  {n:'Crédito high yield (bonos basura)',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Riesgo ignorado',h:'Spread de 3,30% (26-oct) frente a un promedio histórico de 5,16%, con tasas de 5% y Brent sobre 110. El mercado cobra poco por el riesgo de impago.',s:{gap:77,det:68,evi:62,cat:62,liq:70},x:'Señal pierde fuerza si la Fed recorta tasas o si el spread ya supera 4,5%.'},
+  {n:'Bono soberano Ecuador 2035',dir:'comprar',pf:['agresivo'],m:'Oportunidad castigada',h:'Precio 81,66 (26-oct) con riesgo país en 587 pb, 172 pb más que el 1-sep. Si el riesgo vuelve hacia 450 pb el bono se revaloriza.',s:{gap:76,det:60,evi:55,cat:55,liq:45},x:'Cortar pérdida si el riesgo país supera 700 pb o se retrasa una revisión del FMI.'},
+  {n:'Oro tras la corrección',dir:'comprar',pf:['moderado','agresivo'],m:'Oportunidad táctica',h:'Cayó de 4.216 (9-oct) a ~4.008 y rebotó a 4.073 el 27-oct. La inflación por petróleo lo apoya; tasas cerca de 5% lo frenan. Se aleja de su nivel de salida.',s:{gap:45,det:40,evi:52,cat:55,liq:90},x:'Salir si cierra bajo 3.950 USD/oz.'},
+  {n:'Bitcoin',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Activo especulativo',h:'Rebotó a ~80.620 (+1%) el 27-oct con el resto del sector tecnológico; sin flujo de caja que ancle el valor.',s:{gap:40,det:50,evi:35,cat:45,liq:85},x:'No aplica en perfiles conservador y moderado.'}
 ];
 function scoreOf(o){const tw=VARS.reduce((a,v)=>a+W[v[0]],0)||1; return VARS.reduce((a,v)=>a+o.s[v[0]]*W[v[0]],0)/tw;}
 function renderRank(){
@@ -1293,10 +1325,10 @@ const V=D.valuacion;
 const AL=[
   ['cr',fmt(V.margin_tn)+' bn','Deuda en margen récord','Los inversionistas de EE.UU. deben USD 1,50 billones prestados para comprar acciones (récord de junio; 1,45 en agosto). Una caída fuerte dispara llamadas de margen y ventas forzadas.'],
   ['cr',fmt(V.cape,1)+'x','Valuación en percentil '+fmt(V.cape_pct,1),'El CAPE solo fue más alto en 1999-2000. La prima de las acciones sobre los bonos es apenas '+fmt(V.ecy)+' puntos, cerca de su mínimo.'],
-  [last('vix')>=17?'wa':'ok',fmt(last('vix')),'VIX','Bajó de 19,45 (23-oct) a 18,39 (26-oct) con el rebote de la bolsa. Sigue sobre 17: atención antes de la Fed.'],
-  ['wa',fmt(last('hy'))+'%','Spread high yield','3,38% el 23-oct, tras abrirse a 3,40% el 22-oct. Si el crédito se abre de golpe, los fondos apalancados venden a la vez. Vigilar cruce de 3,77% (máximo de 52 semanas).'],
-  ['cr',fmt(last('rp'),0)+' pb','Riesgo país Ecuador','Máximo del año. Encarece el financiamiento externo del Estado y de empresas locales; presiona tasas internas.'],
-  ['wa','28-oct','Decisión de la Fed','Se espera que mantenga la tasa mañana miércoles (≈10% de probabilidad de alza); el mercado busca pistas de un alza en diciembre. Una sorpresa al alza golpearía bonos y acciones a la vez.']
+  [last('vix')>=17?'wa':'ok',fmt(last('vix')),'VIX','Bajó de 19,45 (23-oct) a 17,52 (27-oct) con dos días de alzas en la bolsa. Sigue sobre 17: atención a la Fed de hoy.'],
+  ['wa',fmt(last('hy'))+'%','Spread high yield','3,30% el 26-oct, tras abrirse a 3,40% el 22-oct. Si el crédito se abre de golpe, los fondos apalancados venden a la vez. Vigilar cruce de 3,77% (máximo de 52 semanas).'],
+  ['cr',fmt(last('rp'),0)+' pb','Riesgo país Ecuador','586,5 pb el 27-oct, prácticamente en el máximo del año (587 pb el 23-oct). Encarece el financiamiento externo del Estado y de empresas locales; presiona tasas internas.'],
+  ['wa','28-oct','Decisión de la Fed','Decide hoy a las 13:00 hora Ecuador; se espera que mantenga la tasa y el mercado da alta probabilidad a un alza en diciembre. Una sorpresa al alza golpearía bonos y acciones a la vez.']
 ];
 $('#alerts').innerHTML=AL.map(a=>`<div class="alert"><span class="num">${a[1]}</span><div><strong>${a[2]}</strong><p class="note" style="margin-top:2px">${a[3]}</p></div><span class="pill ${a[0]}">${a[0]==='cr'?'Crítico':a[0]==='wa'?'Atención':'Normal'}</span></div>`).join('');
 
@@ -1366,7 +1398,7 @@ show((location.hash||'').slice(1));
 function show(t,b){msg.textContent=t;bar.hidden=false;up.hidden=!b;}
 if(!('serviceWorker' in navigator)){return;}
 navigator.serviceWorker.register('sw.js').then(function(reg){
-  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261027-0805');setTimeout(function(){bar.hidden=true},5000);});
+  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261028-0755');setTimeout(function(){bar.hidden=true},5000);});
   reg.addEventListener('updatefound',function(){var w=reg.installing;w&&w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller){show('Nueva versión disponible',true);up.onclick=function(){w.postMessage('skip');};}});});
   reg.update();
 }).catch(function(){});
