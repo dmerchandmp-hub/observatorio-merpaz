@@ -945,6 +945,7 @@ footer a{color:var(--accent)}
   <!-- RECOMENDACIÓN -->
   <section class="view" id="v-recomendacion" role="tabpanel" hidden>
     <div class="alerta" id="alertaInv"></div>
+    <div class="read" id="runNow"><h3>Actualizar y enviar ahora</h3><p>Vuelve a correr el proceso diario completo: busca los datos del último cierre, actualiza este tablero y la app del teléfono, y envía el reporte en PDF a dmerchan.dmp@gmail.com. Tarda unos minutos y llega aparte del envío automático de las 07:30.</p><button class="btn" id="runBtn" type="button">Ejecutar ahora</button><p class="note" id="runMsg" aria-live="polite"></p></div>
     <div class="read"><h3>Criterio</h3><p>Cada perfil reparte el capital entre instrumentos con datos públicos de hoy. La renta fija conocida suma solo lo que paga un rendimiento ya pactado o cotizado. La prueba de estrés aplica una caída de la bolsa y estima cuánto perdería cada cartera según cómo reacciona cada activo.</p></div>
     <div class="controls">
       <label for="capital">Capital a invertir (USD)
@@ -1390,6 +1391,39 @@ ${top.map((o,i)=>`${i+1}. ${o.n}: ${fmt(o.sc,0)}/100`).join('\n')}
 Información referencial, no constituye asesoría financiera.`;
 })();
 
+/* ===== ejecutar ahora (vuelve a correr la tarea programada) ===== */
+(function(){
+ const TRIG='trig_01RFwuaFKXrLVo64M3YtdRpz', SRV='Claude Code Remote';
+ const btn=document.getElementById('runBtn'), msg=document.getElementById('runMsg'); if(!btn) return;
+ const say=t=>{msg.textContent=t;};
+ let mcp=null, ready=false;
+ const noApp='Este botón funciona al abrir el tablero en claude.ai (Artifacts › Observatorio de Inversión MERPAZ). Desde la app del teléfono no puede lanzar el proceso.';
+ if(!window.claude||!window.claude.use){ btn.disabled=true; say(noApp); return; }
+ window.claude.use('mcp').then(m=>{mcp=m; ready=true; if(!m){btn.disabled=true; say(noApp);} }).catch(()=>{ready=true; btn.disabled=true; say(noApp);});
+ btn.addEventListener('click',async()=>{
+  if(!ready){ say('Conectando, intente de nuevo en unos segundos.'); return; }
+  if(!mcp) return;
+  btn.disabled=true; say('Enviando la orden…');
+  try{
+   await mcp.callTool(SRV,'fire_trigger',{trigger_id:TRIG,text:'Ejecución manual pedida desde el botón "Ejecutar ahora" del tablero. Corre el proceso completo y envía el reporte por correo aunque ya se haya enviado hoy.'},{cache:false});
+   say('Listo: el proceso se está ejecutando. En unos minutos se actualizará el tablero y llegará el correo con el PDF.');
+  }catch(e){
+   const c=e&&e.code;
+   const t={needs_reauth:'Reconecte "Claude Code Remote" en claude.ai › Configuración › Conectores.',
+    server_not_connected:'Agregue o active "Claude Code Remote" en claude.ai › Configuración › Conectores.',
+    not_in_manifest:'No se dio permiso a esta página para lanzar la tarea. Permítalo desde el menú Permisos del artifact.',
+    approval_required:'Se necesita su aprobación para lanzar la tarea. Pulse de nuevo y elija Permitir.',
+    consent_required:'Se necesita su aprobación para lanzar la tarea. Pulse de nuevo y elija Permitir.',
+    blocked_by_policy:'La política de su organización no permite lanzar tareas desde esta página.',
+    tool_error:'La tarea no pudo iniciarse: '+((e&&e.message)||'error de la tarea')+'.',
+    server_unavailable:'El servicio no respondió. Puede que la orden sí se haya enviado: revise sus tareas programadas antes de pulsar otra vez.',
+    upstream_error:'No se confirmó el envío. Revise sus tareas programadas antes de pulsar otra vez.'}[c];
+   say(t||'No se pudo lanzar el proceso ('+(c||'error')+').');
+  }
+  btn.disabled=false;
+ });
+})();
+
 /* ===== anillo interactivo ===== */
 (function(){const g=document.getElementById('ring'); if(!g) return; let t;
  const go=()=>{g.classList.add('fast'); clearTimeout(t); t=setTimeout(()=>g.classList.remove('fast'),2500); try{navigator.vibrate&&navigator.vibrate(15)}catch(e){}};
@@ -1411,7 +1445,7 @@ show((location.hash||'').slice(1));
 function show(t,b){msg.textContent=t;bar.hidden=false;up.hidden=!b;}
 if(!('serviceWorker' in navigator)){return;}
 navigator.serviceWorker.register('sw.js').then(function(reg){
-  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261028b');setTimeout(function(){bar.hidden=true},5000);});
+  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261028-0845');setTimeout(function(){bar.hidden=true},5000);});
   reg.addEventListener('updatefound',function(){var w=reg.installing;w&&w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller){show('Nueva versión disponible',true);up.onclick=function(){w.postMessage('skip');};}});});
   reg.update();
 }).catch(function(){});
