@@ -8,8 +8,7 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}
 #appbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;gap:10px;align-items:center;padding:8px max(16px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px));background:#0b1622;border-top:1px solid #15405a;font:600 11px "JetBrains Mono",ui-monospace,monospace;letter-spacing:.08em;color:#7fa3b5;text-transform:uppercase}
 #appbar button{all:unset;cursor:pointer;color:#060b12;background:#22d3ee;padding:5px 10px}</style>
-</head><body><!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Observatorio de Inversión MERPAZ</title>
+</head><body><title>Observatorio de Inversión MERPAZ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -172,7 +171,7 @@ footer a{color:var(--accent)}
 <script id="datos" type="application/json">
 {
  "corte": "2026-10-27",
- "generado": "2026-10-28 07:55 (hora Ecuador)",
+ "generado": "2026-10-28 08:54 (hora Ecuador)",
  "contexto": "El martes 27 la tecnología volvió a liderar: el S&P 500 subió 0,60% a 7.722,60, el Nasdaq 1,18% a 26.477,81 y el Dow apenas 0,03% a 52.377,57; la solicitud de salida a bolsa de Anthropic impulsó a los semiconductores (+3,6%), mientras Boeing cayó ~10% al recortar entregas y Coca-Cola bajó 1,6% pese a superar estimaciones. El petróleo cedió por las conversaciones de paz en Medio Oriente (Brent 113,88; WTI 99,90, bajo 100 por primera vez desde el 22-oct), aunque los ataques hutíes a la refinería saudí de Ras Tanura mantienen el riesgo de oferta; el VIX bajó a 17,52, el oro subió a 4.073 y el Tesoro a 10 años quedó en 5,00%. En Ecuador el riesgo país sigue en 587 pb (BCE, 27-oct), en su máximo del año, y el bono 2035 cayó a 81,66. Hoy miércoles 28 la Fed anuncia su decisión a las 13:00 hora Ecuador (se espera que mantenga la tasa, con atención a una posible alza en diciembre) y reportan Microsoft y Alphabet tras el cierre.",
  "series": {
   "sp500": {
@@ -1438,14 +1437,13 @@ function show(v){ if(!views.includes(v)) v='variaciones';
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.v)));
 show((location.hash||'').slice(1));
 </script>
-
-</body></html><div id="appbar" hidden><span id="appmsg"></span><button id="appupd" hidden>Actualizar</button></div>
+<div id="appbar" hidden><span id="appmsg"></span><button id="appupd" hidden>Actualizar</button></div>
 <script>
 (function(){var bar=document.getElementById('appbar'),msg=document.getElementById('appmsg'),up=document.getElementById('appupd');
 function show(t,b){msg.textContent=t;bar.hidden=false;up.hidden=!b;}
 if(!('serviceWorker' in navigator)){return;}
 navigator.serviceWorker.register('sw.js').then(function(reg){
-  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261028-0845');setTimeout(function(){bar.hidden=true},5000);});
+  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261028-0854');setTimeout(function(){bar.hidden=true},5000);});
   reg.addEventListener('updatefound',function(){var w=reg.installing;w&&w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller){show('Nueva versión disponible',true);up.onclick=function(){w.postMessage('skip');};}});});
   reg.update();
 }).catch(function(){});
