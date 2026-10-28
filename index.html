@@ -959,7 +959,7 @@ footer a{color:var(--accent)}
     </div>
     <div class="simres" id="simRes" aria-live="polite"></div>
     <div class="recos">
-      <div><h2>Recomendaciones del día</h2><p class="note" style="margin-top:6px">Lo que conviene hacer hoy con el perfil elegido, combinando la cartera base con las señales del SDIRM. Cambia si mueve los pesos en la pestaña SDIRM.</p></div>
+      <div><h2>Recomendaciones del día</h2><p class="note" style="margin-top:6px">Lo que conviene hacer hoy con el perfil elegido, combinando la cartera base con las señales del SDIRM y las empresas sólidas de la pestaña Empresas. Cambia si mueve los pesos en la pestaña SDIRM.</p></div>
       <div class="tbl"><table>
         <thead><tr><th>Acción</th><th>Activo</th><th class="r">SDIRM</th><th>Motivo</th><th>Cuándo salir</th></tr></thead>
         <tbody id="recoRows"></tbody>
@@ -1015,7 +1015,7 @@ footer a{color:var(--accent)}
     </div>
     <div>
       <h2>Ranking de oportunidades del día</h2>
-      <p class="note" style="margin-top:6px">Puntuación de 0 a 100. Sobre 75: señal fuerte. Entre 60 y 75: vigilar con posición pequeña. Bajo 60: sin señal. Mueva los pesos para ver cómo cambia el orden.</p>
+      <p class="note" style="margin-top:6px">Puntuación de 0 a 100. Sobre 75: señal fuerte. Entre 60 y 75: vigilar con posición pequeña. Bajo 60: sin señal. Incluye las empresas de la pestaña Empresas: las sólidas (ISR 70 o más) como oportunidad de compra y las especulativas (ISR bajo 55) como riesgo a evitar. Mueva los pesos para ver cómo cambia el orden.</p>
     </div>
     <div class="weights" id="weights"></div>
     <div class="tbl"><table>
@@ -1193,6 +1193,9 @@ const INS = {
   ec35: {n:'Bono soberano Ecuador 2035', r:'Agresivo', y:null, beta:0.6, why:'Cotiza a 81,66: descuento amplio. Gana si el riesgo país vuelve hacia 415 pb (nivel de 1-sep).', ytxt:'precio 81,66'},
   ene:  {n:'Sector energía', r:'Agresivo', y:null, beta:0.8, why:'Brent bajó a 113,88 el 27-oct por las conversaciones de paz, pero Ormuz sigue restringido y los hutíes atacaron Ras Tanura; el sector cayó 2% en el día, muy volátil.', ytxt:'variable'}
 };
+/* Empresas -> parte de acciones sólidas de cada perfil */
+(()=>{const top=(D.empresas||[]).filter(e=>e.pais!=='Ecuador').map(e=>({e,x:isrQ(e)})).filter(o=>o.x>=70).sort((a,b)=>b.x-a.x).slice(0,3);
+  if(top.length){INS.def.n='Acciones sólidas ('+top.map(o=>o.e.t).join(', ')+')'; INS.def.why='Las mejores notas ISR de la pestaña Empresas: '+top.map(o=>o.e.n+' '+Math.round(o.x)+'/100').join(', ')+'. Dividendo creciente por décadas; comprar en caídas y de a poco.';}})();
 const PERF = {
   conservador:{t:'Conservador',d:'Preservar capital y cobrar una renta conocida. Horizonte de 6 a 12 meses.',a:{dep:45,tb:35,ust:15,oro:5}},
   moderado:{t:'Moderado',d:'Base de renta fija con una parte de crecimiento defensivo. Horizonte de 1 a 3 años.',a:{dep:25,tb:20,ust:20,def:15,oro:10,ec30:5,spx:5}},
@@ -1271,6 +1274,18 @@ const OPP=[
   {n:'Oro tras la corrección',dir:'comprar',pf:['moderado','agresivo'],m:'Oportunidad táctica',h:'Cayó de 4.216 (9-oct) a ~4.008 y rebotó a 4.073 el 27-oct. La inflación por petróleo lo apoya; tasas cerca de 5% lo frenan. Se aleja de su nivel de salida.',s:{gap:45,det:40,evi:52,cat:55,liq:90},x:'Salir si cierra bajo 3.950 USD/oz.'},
   {n:'Bitcoin',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Activo especulativo',h:'Rebotó a ~80.620 (+1%) el 27-oct con el resto del sector tecnológico; sin flujo de caja que ancle el valor.',s:{gap:40,det:50,evi:35,cat:45,liq:85},x:'No aplica en perfiles conservador y moderado.'}
 ];
+/* Empresas -> SDIRM: sólidas (ISR>=70) como compra, especulativas (ISR<55) como evitar */
+(()=>{const E=(D.empresas||[]).map(e=>({e,x:isrQ(e)}));
+  E.filter(o=>o.x>=70).sort((a,b)=>b.x-a.x).slice(0,4).forEach(({e,x})=>OPP.push({emp:true,n:e.n+' ('+e.t+')',dir:'comprar',
+    pf:x>=78?['conservador','moderado','agresivo']:['moderado','agresivo'],m:'Empresa sólida · ISR '+Math.round(x),
+    h:e.dato+'. Dividendo '+fmt(e.div)+'%; '+e.racha.toLowerCase()+'. Riesgo: '+e.riesgo+'.',
+    s:{gap:e.s.val,det:e.s.sol,evi:e.s.div,cat:e.s.ren,liq:e.pais==='Ecuador'?35:75},
+    x:'Salir si recorta el dividendo o cae más de 20% sin cambio en sus fundamentos.'}));
+  E.filter(o=>o.x<55).forEach(({e,x})=>OPP.push({emp:true,n:e.n+' ('+e.t+')',dir:'evitar',pf:['conservador','moderado','agresivo'],
+    m:'Empresa especulativa · ISR '+Math.round(x),h:e.dato+'. '+e.riesgo+'.',
+    s:{gap:100-e.s.val,det:100-e.s.sol,evi:60,cat:e.s.ren,liq:90},
+    x:'Reconsiderar si el precio corrige más de 30% o si empieza a pagar dividendo.'}));
+})();
 function scoreOf(o){const tw=VARS.reduce((a,v)=>a+W[v[0]],0)||1; return VARS.reduce((a,v)=>a+o.s[v[0]]*W[v[0]],0)/tw;}
 function renderRank(){
   const tw=VARS.reduce((a,v)=>a+W[v[0]],0);
@@ -1278,7 +1293,7 @@ function renderRank(){
   const list=OPP.map(o=>({...o,sc:scoreOf(o)})).sort((a,b)=>b.sc-a.sc);
   if(typeof renderRecos==='function') renderRecos();
   $('#rank').innerHTML=list.map(o=>{const [c,t]=o.sc>=75?['cr','Señal fuerte']:o.sc>=60?['wa','Vigilar']:['ne','Sin señal'];
-    return `<tr><td><strong>${o.n}</strong></td><td class="note" style="white-space:nowrap">${o.m}</td><td style="min-width:280px">${o.h}</td>
+    return `<tr><td><strong>${o.n}</strong>${o.emp?' <span class="pill ne" style="margin-left:4px">Empresa</span>':''}</td><td class="note" style="white-space:nowrap">${o.m}</td><td style="min-width:280px">${o.h}</td>
     <td class="r"><div class="score" style="justify-content:flex-end"><span class="meter"><i style="width:${o.sc}%"></i></span><span class="num">${fmt(o.sc,0)}</span></div></td>
     <td><span class="pill ${c}">${t}</span></td><td class="note" style="min-width:220px">${o.x}</td></tr>`}).join('');
 }
@@ -1297,8 +1312,6 @@ function alertaInv(){
   const items=[];
   buy.forEach(o=>items.push({k:o.sc>=75?'Comprar':'Invertir poco a poco',t:o.n+' ('+fmt(o.sc,0)+'/100)',d:o.h.split('. ')[0]+'.',perf:o.pf.length===3?'todos los perfiles':'perfil '+o.pf.join(' y '),c:'up'}));
   items.push({k:'Renta segura',t:'Depósito a plazo 361+ días al '+fmt(dep)+'% o Tesoro EE.UU. 10 años al '+fmt(ust)+'%',d:'Rendimiento conocido para la parte conservadora de cualquier cartera.',perf:'todos los perfiles',c:'up'});
-  const emps=(D.empresas||[]).map(e=>({e,x:isrQ(e)})).filter(o=>o.x>=78).sort((a,b)=>b.x-a.x).slice(0,3);
-  if(emps.length) items.push({k:'Empresas seguras',t:emps.map(o=>o.e.n+' ('+Math.round(o.x)+'/100)').join(', '),d:'Acciones sólidas con dividendo creciente por décadas; comprar de a poco.',perf:'perfil moderado y agresivo',c:'up'});
   avoid.forEach(o=>items.push({k:'Evitar',t:o.n+' ('+fmt(o.sc,0)+'/100)',d:o.h.split('. ')[0]+'.',perf:'todos los perfiles',c:'down'}));
   const tit=nivel==='fuerte'?'Alerta fuerte: oportunidad para invertir hoy':nivel==='moderada'?'Alerta de inversión: oportunidad moderada hoy':'Sin oportunidad nueva hoy: mantener la cartera base';
   return {nivel,tit,items};
@@ -1315,7 +1328,7 @@ function renderRecos(){
     let a,c;
     if(o.dir==='comprar'){ if(o.sc>=75){a='Comprar';c='var(--up)'} else if(o.sc>=60){a='Incrementar poco a poco';c='var(--up)'} else {a='Mantener';c='var(--muted)'} }
     else { if(o.sc>=75){a='Evitar / reducir';c='var(--down)'} else if(o.sc>=60){a='Subponderar';c='var(--warn)'} else {a='No invertir';c='var(--muted)'} }
-    return `<tr><td><span class="act" style="color:${c}">${a}</span></td><td><strong>${o.n}</strong><small>${o.m}</small></td><td class="r num">${fmt(o.sc,0)}</td><td style="min-width:260px">${o.h}</td><td class="note" style="min-width:200px">${o.x}</td></tr>`;}).join('');
+    return `<tr><td><span class="act" style="color:${c}">${a}</span></td><td><strong>${o.n}</strong>${o.emp?' <span class="pill ne">Empresa</span>':''}<small>${o.m}</small></td><td class="r num">${fmt(o.sc,0)}</td><td style="min-width:260px">${o.h}</td><td class="note" style="min-width:200px">${o.x}</td></tr>`;}).join('');
   el.innerHTML=base+rows;
   renderAlerta();
 }
@@ -1398,7 +1411,7 @@ show((location.hash||'').slice(1));
 function show(t,b){msg.textContent=t;bar.hidden=false;up.hidden=!b;}
 if(!('serviceWorker' in navigator)){return;}
 navigator.serviceWorker.register('sw.js').then(function(reg){
-  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261028-0755');setTimeout(function(){bar.hidden=true},5000);});
+  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261028b');setTimeout(function(){bar.hidden=true},5000);});
   reg.addEventListener('updatefound',function(){var w=reg.installing;w&&w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller){show('Nueva versión disponible',true);up.onclick=function(){w.postMessage('skip');};}});});
   reg.update();
 }).catch(function(){});
