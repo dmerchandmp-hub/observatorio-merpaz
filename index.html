@@ -8,8 +8,7 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}
 #appbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;gap:10px;align-items:center;padding:8px max(16px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px));background:#0b1622;border-top:1px solid #15405a;font:600 11px "JetBrains Mono",ui-monospace,monospace;letter-spacing:.08em;color:#7fa3b5;text-transform:uppercase}
 #appbar button{all:unset;cursor:pointer;color:#060b12;background:#22d3ee;padding:5px 10px}</style>
-</head><body><!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Observatorio de Inversión MERPAZ</title>
+</head><body><title>Observatorio de Inversión MERPAZ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -171,9 +170,9 @@ footer a{color:var(--accent)}
 
 <script id="datos" type="application/json">
 {
- "corte": "2026-10-28",
- "generado": "2026-10-29 08:15 (hora Ecuador)",
- "contexto": "El miércoles 28 la Fed mantuvo su tasa en 3,75-4,00% en una votación dividida 10-2 (Cook y Hammack pidieron subirla) y el mercado ya asigna 85% de probabilidad a un alza en diciembre; aun así el S&P 500 subió 0,28% a 7.743,98 (tercera alza seguida), el Nasdaq 0,27% a 26.549,85 y el Dow 0,19% a 52.475,10, con Oracle +11% y los semiconductores al alza. El Tesoro a 10 años subió a 5,04%, el VIX bajó a 16,91 y el petróleo rebotó por las tensiones en Medio Oriente (Brent 115,32; WTI 102,78), mientras el oro cedió a 4.051,6. Tras el cierre Alphabet cayó ~10% por su primer resultado bajo lo esperado en casi cuatro años, Microsoft subió ~2,6% (Azure +48%) y Fortinet se desplomó ~26% por un margen bruto débil. En Ecuador el riesgo país sigue en 587 pb (último dato BCE, 27-oct); hoy jueves 29 se publican el PIB del tercer trimestre y el PCE de septiembre (07:30 hora Ecuador), deciden el BCE europeo y el Banco de Inglaterra, y Amazon reporta tras el cierre.",
+ "corte": "2026-10-29",
+ "generado": "2026-10-30 08:20 (hora Ecuador)",
+ "contexto": "El jueves 29 Wall Street cayó: el S&P 500 bajó 0,30% a 7.720,39, el Nasdaq 1,38% a 26.184,72 y el Dow 0,25% a 52.342,56, arrastrados por Alphabet (-12,6%) tras su primer resultado bajo lo esperado en casi cuatro años, Caterpillar (-9,3%) y Fortinet (-20,1%). El PIB del tercer trimestre creció 3,4% anualizado (sobre el 3,1% esperado) y la inflación PCE de septiembre llegó a 3,6% anual con el núcleo en línea; la probabilidad de un alza de la Fed en diciembre bajó a 78% (desde 84%) y el Tesoro a 10 años cedió 7 pb a 4,98%. El petróleo retrocedió (Brent 114,88; WTI 102,00), el oro bajó a 4.031,7, Bitcoin cayó 2,9% a ~78.926 y Amazon perdía ~6% después del cierre; el riesgo país de Ecuador sigue en 587 pb (último dato BCE, 27-oct). Hoy viernes 30: Exxon y Chevron reportan antes de la apertura, índice de costo laboral a las 07:30 hora Ecuador, PMI de Chicago y decisión del Banco de Japón.",
  "series": {
   "sp500": {
    "n": "S&P 500",
@@ -185,17 +184,19 @@ footer a{color:var(--accent)}
     "10-23",
     "10-26",
     "10-27",
-    "10-28"
+    "10-28",
+    "10-29"
    ],
    "v": [
     7663.43,
     7623.68,
     7676.8,
     7722.6,
-    7743.98
+    7743.98,
+    7720.39
    ],
-   "dia": 0.28,
-   "ytd": 15.52,
+   "dia": -0.3,
+   "ytd": 15.17,
    "fuente": "Capp Notes / Yahoo Finance"
   },
   "nasdaq": {
@@ -209,7 +210,8 @@ footer a{color:var(--accent)}
     "10-23",
     "10-26",
     "10-27",
-    "10-28"
+    "10-28",
+    "10-29"
    ],
    "v": [
     27599.89,
@@ -217,10 +219,11 @@ footer a{color:var(--accent)}
     25955.34,
     26169.38,
     26477.81,
-    26549.85
+    26549.85,
+    26184.72
    ],
-   "dia": 0.27,
-   "ytd": 15.96,
+   "dia": -1.38,
+   "ytd": 14.37,
    "nota": "Máximo histórico 27.599,89 el 6-oct",
    "fuente": "Capp Notes / Yahoo Finance"
   },
@@ -234,17 +237,19 @@ footer a{color:var(--accent)}
     "10-23",
     "10-26",
     "10-27",
-    "10-28"
+    "10-28",
+    "10-29"
    ],
    "v": [
     52867.98,
     52215.16,
     52361.52,
     52377.57,
-    52475.1
+    52475.1,
+    52342.56
    ],
-   "dia": 0.19,
-   "ytd": 13.68,
+   "dia": -0.25,
+   "ytd": 13.39,
    "fuente": "Capp Notes / Yahoo Finance"
   },
   "ust10": {
@@ -270,7 +275,8 @@ footer a{color:var(--accent)}
     "10-23",
     "10-26",
     "10-27",
-    "10-28"
+    "10-28",
+    "10-29"
    ],
    "v": [
     5.23,
@@ -290,7 +296,8 @@ footer a{color:var(--accent)}
     5.0,
     4.98,
     5.0,
-    5.04
+    5.04,
+    4.98
    ],
    "tipo": "tasa",
    "fuente": "FRED DGS10 / Capp Notes / Yahoo Finance"
@@ -309,7 +316,7 @@ footer a{color:var(--accent)}
     4.0
    ],
    "tipo": "tasa",
-   "nota": "Rango 3,75-4,00%: mantenido el 28-oct (votación 10-2; Cook y Hammack pidieron alza). CME FedWatch: 85% de probabilidad de alza en diciembre",
+   "nota": "Rango 3,75-4,00%: mantenido el 28-oct (votación 10-2). CME FedWatch 29-oct: 78% de probabilidad de alza en diciembre (84% el día anterior)",
    "fuente": "Reserva Federal"
   },
   "hy": {
@@ -326,7 +333,8 @@ footer a{color:var(--accent)}
     "10-22",
     "10-23",
     "10-26",
-    "10-27"
+    "10-27",
+    "10-28"
    ],
    "v": [
     3.23,
@@ -337,10 +345,11 @@ footer a{color:var(--accent)}
     3.4,
     3.38,
     3.3,
-    3.18
+    3.18,
+    3.14
    ],
    "tipo": "riesgo",
-   "nota": "Promedio desde 1996: 5,16%. Último dato FRED: 27-oct (mínimo de la serie)",
+   "nota": "Promedio desde 1996: 5,16%. Último dato FRED: 28-oct (nuevo mínimo de la serie)",
    "fuente": "FRED BAMLH0A0HYM2"
   },
   "vix": {
@@ -358,7 +367,8 @@ footer a{color:var(--accent)}
     "10-23",
     "10-26",
     "10-27",
-    "10-28"
+    "10-28",
+    "10-29"
    ],
    "v": [
     16.46,
@@ -370,10 +380,11 @@ footer a{color:var(--accent)}
     19.45,
     18.39,
     17.52,
-    16.91
+    16.91,
+    17.2
    ],
    "tipo": "riesgo",
-   "nota": "Cierre 28-oct (-3,48%) según Capp Notes; FRED publica con rezago",
+   "nota": "Cierre 29-oct (+1,71%) según Capp Notes; FRED publica con rezago",
    "fuente": "FRED VIXCLS / Capp Notes"
   },
   "oro": {
@@ -400,7 +411,8 @@ footer a{color:var(--accent)}
     "10-23",
     "10-26",
     "10-27",
-    "10-28"
+    "10-28",
+    "10-29"
    ],
    "v": [
     4202.3,
@@ -421,10 +433,11 @@ footer a{color:var(--accent)}
     4008.0,
     4028.0,
     4073.1,
-    4051.6
+    4051.6,
+    4031.7
    ],
    "fuente": "Investing.com / Capp Notes",
-   "nota": "Cierre 28-oct -0,53% (Capp Notes)"
+   "nota": "Cierre 29-oct -0,49% (Capp Notes)"
   },
   "wti": {
    "n": "Petróleo WTI",
@@ -437,7 +450,8 @@ footer a{color:var(--accent)}
     "10-23",
     "10-26",
     "10-27",
-    "10-28"
+    "10-28",
+    "10-29"
    ],
    "v": [
     89.43,
@@ -445,9 +459,10 @@ footer a{color:var(--accent)}
     103.27,
     101.82,
     99.9,
-    102.78
+    102.78,
+    102.0
    ],
-   "dia": 2.88,
+   "dia": -0.76,
    "fuente": "Capp Notes"
   },
   "brent": {
@@ -460,17 +475,19 @@ footer a{color:var(--accent)}
     "10-23",
     "10-26",
     "10-27",
-    "10-28"
+    "10-28",
+    "10-29"
    ],
    "v": [
     112.91,
     116.72,
     115.95,
     113.88,
-    115.32
+    115.32,
+    114.88
    ],
-   "dia": 1.26,
-   "nota": "Rebotó el 28-oct por las tensiones en Medio Oriente; ataques hutíes a Ras Tanura mantienen el riesgo de oferta",
+   "dia": -0.38,
+   "nota": "Cedió el 29-oct tras el rebote del 28; las tensiones en Medio Oriente (Ormuz, ataques hutíes) mantienen el riesgo de oferta",
    "fuente": "Capp Notes"
   },
   "btc": {
@@ -483,18 +500,20 @@ footer a{color:var(--accent)}
     "10-23",
     "10-26",
     "10-27",
-    "10-28"
+    "10-28",
+    "10-29"
    ],
    "v": [
     81300,
     81230,
     79640,
     80624,
-    81255
+    81255,
+    78926
    ],
-   "dia": 0.78,
+   "dia": -2.88,
    "fuente": "Capp Notes",
-   "nota": "Aproximado al cierre de Wall Street del 28-oct (Capp Notes)"
+   "nota": "Aproximado al cierre de Wall Street del 29-oct (Capp Notes)"
   },
   "rp": {
    "n": "Riesgo país Ecuador (EMBI)",
@@ -524,7 +543,7 @@ footer a{color:var(--accent)}
     586.52
    ],
    "tipo": "riesgo",
-   "nota": "Máximo de 2026 en 587 pb (23-oct). Último dato BCE: 27-oct (sin dato nuevo del 28-oct). Hace un año: cerca de 813 pb",
+   "nota": "Máximo de 2026 en 587 pb (23-oct). Último dato BCE: 27-oct (sin dato nuevo al 30-oct). Hace un año: cerca de 813 pb",
    "fuente": "Banco Central del Ecuador"
   },
   "ec2030": {
@@ -544,7 +563,7 @@ footer a{color:var(--accent)}
     97.27,
     97.06
    ],
-   "fuente": "BCE (último dato 26-oct)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 30-oct)"
   },
   "ec2034": {
    "n": "Bono Ecuador 2034",
@@ -563,7 +582,7 @@ footer a{color:var(--accent)}
     91.0,
     90.15
    ],
-   "fuente": "BCE (último dato 26-oct)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 30-oct)"
   },
   "ec2035": {
    "n": "Bono Ecuador 2035",
@@ -582,7 +601,7 @@ footer a{color:var(--accent)}
     82.18,
     81.66
    ],
-   "fuente": "BCE (último dato 26-oct)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 30-oct)"
   },
   "ec2039": {
    "n": "Bono Ecuador 2039",
@@ -601,7 +620,7 @@ footer a{color:var(--accent)}
     88.8,
     88.2
    ],
-   "fuente": "BCE (último dato 26-oct)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 30-oct)"
   },
   "ec2040": {
    "n": "Bono Ecuador 2040",
@@ -620,7 +639,7 @@ footer a{color:var(--accent)}
     71.67,
     71.11
    ],
-   "fuente": "BCE (último dato 26-oct)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 30-oct)"
   },
   "tpr": {
    "n": "Tasa pasiva referencial BCE",
@@ -677,11 +696,11 @@ footer a{color:var(--accent)}
   "margin_ago_tn": 1.45
  },
  "tbills": {
-  "fecha": "2026-10-26",
-  "13s": 4.15,
-  "26s": 4.36,
-  "52s": 4.45,
-  "fuente": "Tesoro de EE.UU. (tasas diarias) vía RateBrain"
+  "fecha": "2026-10-28",
+  "13s": 4.11,
+  "26s": 4.33,
+  "52s": 4.47,
+  "fuente": "Tesoro de EE.UU. (tasas diarias) vía Treasury Rate Watch"
  },
  "empresas": [
   {
@@ -842,7 +861,7 @@ footer a{color:var(--accent)}
    "crec": 4.0,
    "racha": "Más de 40 años subiendo dividendo",
    "pe": "—",
-   "dato": "+55% en 2026 con Brent sobre 110; el sector energía cayó 2% el 27-oct",
+   "dato": "+55% en 2026 con Brent sobre 110; reporta resultados hoy 30-oct antes de la apertura",
    "riesgo": "Muy ligada al precio del petróleo; cae fuerte si baja el crudo",
    "s": {
     "sol": 85,
@@ -899,14 +918,14 @@ footer a{color:var(--accent)}
    "n": "Fortinet",
    "sec": "Ciberseguridad",
    "pais": "EE.UU.",
-   "precio": 192.49,
-   "fp": "12-oct (cayó 5,9% el 28-oct y ~26% tras el cierre)",
+   "precio": 139.1,
+   "fp": "29-oct",
    "div": 0,
    "crec": null,
    "racha": "No paga dividendo",
    "pe": "—",
-   "dato": "+142% en 2026 hasta mediados de octubre; el 28-oct cayó 5,9% en la sesión y ~26% tras el cierre por un margen bruto bajo lo esperado",
-   "riesgo": "Margen bruto débil y subida previa muy rápida: alta volatilidad",
+   "dato": "Cayó 20,1% el 29-oct (a 139,10 desde 174,08) por un margen bruto bajo lo esperado; venía de subir más de 140% en el año",
+   "riesgo": "Margen bruto débil y alta volatilidad: perdió cerca de 25% en dos sesiones",
    "s": {
     "sol": 65,
     "div": 0,
@@ -1208,13 +1227,13 @@ $('#charts').innerHTML=['ust10','oro','rp','vix','hy'].map(lineChart).join('');
 const INS = {
   dep:  {n:'Depósito a plazo Ecuador (181 a 361+ días)', r:'Conservador', y:5.6, beta:0, why:'BCE oct-26: 4,96% a 181-360 días y 6,21% a 361+. Elegir banco con buena calificación.', ytxt:'4,96% – 6,21%'},
   tb:   {n:'Letras del Tesoro EE.UU. (T-bills, 3 a 12 meses)', r:'Conservador', y:D.tbills['13s'], beta:0, why:'Liquidez y riesgo soberano de EE.UU. La letra a 52 semanas rinde '+fmt(D.tbills['52s'])+'%, más que el dividendo de cualquier empresa sólida.', ytxt:fmt(D.tbills['13s'])+'% – '+fmt(D.tbills['52s'])+'%'},
-  ust:  {n:'Bono del Tesoro EE.UU. 10 años', r:'Conservador', y:last('ust10'), beta:-0.15, why:'5,04% cerca de máximos de dos décadas; sube de precio cuando la bolsa cae (refugio del 22-oct). La Fed mantuvo la tasa el 28-oct, pero el mercado da 85% a un alza en diciembre.', ytxt:fmt(last('ust10'))+'%'},
+  ust:  {n:'Bono del Tesoro EE.UU. 10 años', r:'Conservador', y:last('ust10'), beta:-0.15, why:'4,98% cerca de máximos de dos décadas; subió de precio el 29-oct cuando cayó la tecnología (como el 22-oct). La Fed mantuvo la tasa el 28-oct; la probabilidad de alza en diciembre bajó a 78%.', ytxt:fmt(last('ust10'))+'%'},
   def:  {n:'Acciones defensivas / S&P 500 igual ponderado', r:'Moderado', y:null, beta:0.7, why:'Consumo básico y salud resistieron la venta tecnológica; menos exposición a megacaps de IA.', ytxt:'variable'},
   spx:  {n:'Índice S&P 500 (ETF amplio)', r:'Agresivo', y:null, beta:1.0, why:'CAPE 40,7, percentil 98,9 desde 1881: valuación extrema, entrar escalonado.', ytxt:'variable'},
-  oro:  {n:'Oro', r:'Moderado', y:null, beta:0.1, why:'Cerró en 4.051,6 el 28-oct (-0,5%), sobre el soporte de 3.950; protege ante inflación por petróleo, pero sufre con tasas altas.', ytxt:fmt(last('oro'),0)+' USD/oz'},
+  oro:  {n:'Oro', r:'Moderado', y:null, beta:0.1, why:'Cerró en 4.031,7 el 29-oct (-0,5%), sobre el soporte de 3.950; protege ante inflación (PCE 3,6% anual), pero sufre con tasas altas.', ytxt:fmt(last('oro'),0)+' USD/oz'},
   ec30: {n:'Bono soberano Ecuador 2030', r:'Moderado', y:null, beta:0.5, why:'Cotiza a 97,06 (cerca de la par); vencimiento corto con riesgo país en 587 pb.', ytxt:'precio 97,06'},
   ec35: {n:'Bono soberano Ecuador 2035', r:'Agresivo', y:null, beta:0.6, why:'Cotiza a 81,66: descuento amplio. Gana si el riesgo país vuelve hacia 415 pb (nivel de 1-sep).', ytxt:'precio 81,66'},
-  ene:  {n:'Sector energía', r:'Agresivo', y:null, beta:0.8, why:'Brent rebotó a 115,32 (+1,3%) el 28-oct por las tensiones en Medio Oriente; Ormuz sigue restringido y los hutíes atacaron Ras Tanura. Sector muy volátil.', ytxt:'variable'}
+  ene:  {n:'Sector energía', r:'Agresivo', y:null, beta:0.8, why:'Brent cedió a 114,88 (-0,4%) el 29-oct tras el rebote previo; Ormuz sigue restringido y los hutíes atacaron Ras Tanura. Exxon y Chevron reportan hoy 30-oct. Sector muy volátil.', ytxt:'variable'}
 };
 /* Empresas -> parte de acciones sólidas de cada perfil */
 (()=>{const top=(D.empresas||[]).filter(e=>e.pais!=='Ecuador').map(e=>({e,x:isrQ(e)})).filter(o=>o.x>=70).sort((a,b)=>b.x-a.x).slice(0,3);
@@ -1290,12 +1309,12 @@ renderCalc();
 const VARS=[['gap','Diferencia valor estimado vs precio',30],['det','Deterioro o riesgo no reconocido',25],['evi','Evidencia verificable',20],['cat','Catalizadores',15],['liq','Liquidez y ejecución',10]];
 const W={}; VARS.forEach(v=>W[v[0]]=v[2]);
 const OPP=[
-  {n:'Megacaps de IA / Nasdaq',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Burbuja',h:'Precio descuenta retornos de la inversión en IA que el flujo de caja aún no muestra. Tras el cierre del 28-oct Alphabet cayó ~10% por su primer resultado bajo lo esperado en casi cuatro años y Meta sumó su tercera caída; Microsoft subió ~2,6% con Azure +48%. Oracle +11% muestra la euforia por IA. CAPE del mercado 40,7.',s:{gap:86,det:78,evi:72,cat:85,liq:95},x:'Invalidar si el Nasdaq recupera su máximo de 27.600 o si el flujo libre de las megacaps vuelve a crecer dos trimestres seguidos.'},
-  {n:'Bono del Tesoro EE.UU. 10 años',dir:'comprar',pf:['conservador','moderado','agresivo'],m:'Oportunidad defensiva',h:'Rinde 5,04% tras tocar 5,36%. Si la desaceleración tecnológica se extiende, el bono gana precio como el 22-oct. La Fed mantuvo la tasa el 28-oct, pero dos votos pidieron alza y el mercado da 85% a una subida en diciembre, lo que frena el precio en el corto plazo.',s:{gap:70,det:60,evi:75,cat:65,liq:100},x:'Salir o reducir si el rendimiento cierra sobre 5,30% (la Fed sube más de lo previsto).'},
-  {n:'Crédito high yield (bonos basura)',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Riesgo ignorado',h:'Spread de 3,18% (27-oct), el más estrecho de la serie, frente a un promedio histórico de 5,16%, con tasas de 5% y Brent sobre 115. El mercado cobra cada vez menos por el riesgo de impago.',s:{gap:79,det:68,evi:62,cat:62,liq:70},x:'Señal pierde fuerza si la Fed recorta tasas o si el spread ya supera 4,5%.'},
+  {n:'Megacaps de IA / Nasdaq',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Burbuja',h:'Precio descuenta retornos de la inversión en IA que el flujo de caja aún no muestra. El 29-oct Alphabet cayó 12,6% (primer resultado bajo lo esperado en casi cuatro años y flujo de caja libre negativo) y el Nasdaq perdió 1,38%; Amazon caía ~6% tras el cierre. CAPE del mercado 40,7.',s:{gap:86,det:80,evi:76,cat:85,liq:95},x:'Invalidar si el Nasdaq recupera su máximo de 27.600 o si el flujo libre de las megacaps vuelve a crecer dos trimestres seguidos.'},
+  {n:'Bono del Tesoro EE.UU. 10 años',dir:'comprar',pf:['conservador','moderado','agresivo'],m:'Oportunidad defensiva',h:'Rinde 4,98% tras tocar 5,36%. El 29-oct ganó precio (-7 pb) mientras caía la tecnología, como el 22-oct. PIB fuerte (3,4%) y PCE de 3,6% sostienen 78% de probabilidad de alza de la Fed en diciembre, lo que frena el precio en el corto plazo.',s:{gap:70,det:60,evi:75,cat:65,liq:100},x:'Salir o reducir si el rendimiento cierra sobre 5,30% (la Fed sube más de lo previsto).'},
+  {n:'Crédito high yield (bonos basura)',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Riesgo ignorado',h:'Spread de 3,14% (28-oct), nuevo mínimo de la serie, frente a un promedio histórico de 5,16%, con tasas cerca de 5% y Brent sobre 114. El mercado cobra cada vez menos por el riesgo de impago.',s:{gap:80,det:68,evi:62,cat:62,liq:70},x:'Señal pierde fuerza si la Fed recorta tasas o si el spread ya supera 4,5%.'},
   {n:'Bono soberano Ecuador 2035',dir:'comprar',pf:['agresivo'],m:'Oportunidad castigada',h:'Precio 81,66 (26-oct, último dato BCE) con riesgo país en 587 pb, 172 pb más que el 1-sep. Si el riesgo vuelve hacia 450 pb el bono se revaloriza.',s:{gap:76,det:60,evi:55,cat:55,liq:45},x:'Cortar pérdida si el riesgo país supera 700 pb o se retrasa una revisión del FMI.'},
-  {n:'Oro tras la corrección',dir:'comprar',pf:['moderado','agresivo'],m:'Oportunidad táctica',h:'Cayó de 4.216 (9-oct) a ~4.008, rebotó a 4.073 el 27-oct y cedió a 4.051,6 el 28-oct. La inflación por petróleo lo apoya; tasas cerca de 5% y una posible alza de la Fed en diciembre lo frenan.',s:{gap:45,det:40,evi:52,cat:55,liq:90},x:'Salir si cierra bajo 3.950 USD/oz.'},
-  {n:'Bitcoin',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Activo especulativo',h:'Subió a ~81.255 (+0,8%) el 28-oct con el resto del sector tecnológico; sin flujo de caja que ancle el valor.',s:{gap:40,det:50,evi:35,cat:45,liq:85},x:'No aplica en perfiles conservador y moderado.'}
+  {n:'Oro tras la corrección',dir:'comprar',pf:['moderado','agresivo'],m:'Oportunidad táctica',h:'Cayó de 4.216 (9-oct) a ~4.008, rebotó a 4.073 el 27-oct y cedió a 4.031,7 el 29-oct. La inflación (PCE 3,6%) lo apoya; tasas cerca de 5% y una posible alza de la Fed en diciembre lo frenan.',s:{gap:45,det:40,evi:52,cat:55,liq:90},x:'Salir si cierra bajo 3.950 USD/oz.'},
+  {n:'Bitcoin',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Activo especulativo',h:'Cayó 2,9% a ~78.926 el 29-oct junto con la tecnología; sin flujo de caja que ancle el valor.',s:{gap:40,det:50,evi:35,cat:45,liq:85},x:'No aplica en perfiles conservador y moderado.'}
 ];
 /* Empresas -> SDIRM: sólidas (ISR>=70) como compra, especulativas (ISR<55) como evitar */
 (()=>{const E=(D.empresas||[]).map(e=>({e,x:isrQ(e)}));
@@ -1361,10 +1380,10 @@ const V=D.valuacion;
 const AL=[
   ['cr',fmt(V.margin_tn)+' bn','Deuda en margen récord','Los inversionistas de EE.UU. deben USD 1,50 billones prestados para comprar acciones (récord de junio; 1,45 en agosto). Una caída fuerte dispara llamadas de margen y ventas forzadas.'],
   ['cr',fmt(V.cape,1)+'x','Valuación en percentil '+fmt(V.cape_pct,1),'El CAPE solo fue más alto en 1999-2000. La prima de las acciones sobre los bonos es apenas '+fmt(V.ecy)+' puntos, cerca de su mínimo.'],
-  [last('vix')>=17?'wa':'ok',fmt(last('vix')),'VIX','Bajó de 19,45 (23-oct) a 16,91 (28-oct) con tres días de alzas en la bolsa; quedó bajo 17 tras la Fed. Atención al PIB y al PCE de hoy.'],
-  ['wa',fmt(last('hy'))+'%','Spread high yield','3,18% el 27-oct, el más estrecho de la serie, tras abrirse a 3,40% el 22-oct. Si el crédito se abre de golpe, los fondos apalancados venden a la vez. Vigilar cruce de 3,77% (máximo de 52 semanas).'],
+  [last('vix')>=17?'wa':'ok',fmt(last('vix')),'VIX','Subió a 17,20 (+1,7%) el 29-oct con la caída de Alphabet, tras 16,91 el 28-oct. Atención a los resultados de Amazon, Exxon y Chevron y al costo laboral de hoy.'],
+  ['wa',fmt(last('hy'))+'%','Spread high yield','3,14% el 28-oct, nuevo mínimo de la serie, tras abrirse a 3,40% el 22-oct. Si el crédito se abre de golpe, los fondos apalancados venden a la vez. Vigilar cruce de 3,77% (máximo de 52 semanas).'],
   ['cr',fmt(last('rp'),0)+' pb','Riesgo país Ecuador','586,5 pb el 27-oct (último dato BCE), prácticamente en el máximo del año (587 pb el 23-oct). Encarece el financiamiento externo del Estado y de empresas locales; presiona tasas internas.'],
-  ['wa','85%','Alza de la Fed en diciembre','La Fed mantuvo la tasa el 28-oct con dos votos a favor de subirla; CME FedWatch da 85% de probabilidad a un alza en diciembre. Hoy 29-oct: PIB del tercer trimestre y PCE de septiembre a las 07:30 hora Ecuador. Un dato de inflación alto golpearía bonos y acciones a la vez.']
+  ['wa','78%','Alza de la Fed en diciembre','La Fed mantuvo la tasa el 28-oct con dos votos a favor de subirla; tras el PIB de 3,4% y el PCE de 3,6% anual, CME FedWatch bajó a 78% (desde 84%) la probabilidad de alza en diciembre. Hoy 30-oct: índice de costo laboral (07:30 hora Ecuador) y regresan los discursos de la Fed.']
 ];
 $('#alerts').innerHTML=AL.map(a=>`<div class="alert"><span class="num">${a[1]}</span><div><strong>${a[2]}</strong><p class="note" style="margin-top:2px">${a[3]}</p></div><span class="pill ${a[0]}">${a[0]==='cr'?'Crítico':a[0]==='wa'?'Atención':'Normal'}</span></div>`).join('');
 
@@ -1460,15 +1479,13 @@ function show(v){ if(!views.includes(v)) v='variaciones';
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.v)));
 show((location.hash||'').slice(1));
 </script>
-
-
-</body></html><div id="appbar" hidden><span id="appmsg"></span><button id="appupd" hidden>Actualizar</button></div>
+<div id="appbar" hidden><span id="appmsg"></span><button id="appupd" hidden>Actualizar</button></div>
 <script>
 (function(){var bar=document.getElementById('appbar'),msg=document.getElementById('appmsg'),up=document.getElementById('appupd');
 function show(t,b){msg.textContent=t;bar.hidden=false;up.hidden=!b;}
 if(!('serviceWorker' in navigator)){return;}
 navigator.serviceWorker.register('sw.js').then(function(reg){
-  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261029-0815');setTimeout(function(){bar.hidden=true},5000);});
+  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261030-0820');setTimeout(function(){bar.hidden=true},5000);});
   reg.addEventListener('updatefound',function(){var w=reg.installing;w&&w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller){show('Nueva versión disponible',true);up.onclick=function(){w.postMessage('skip');};}});});
   reg.update();
 }).catch(function(){});
