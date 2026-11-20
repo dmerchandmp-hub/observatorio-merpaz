@@ -8,7 +8,8 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}
 #appbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;gap:10px;align-items:center;padding:8px max(16px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px));background:#0b1622;border-top:1px solid #15405a;font:600 11px "JetBrains Mono",ui-monospace,monospace;letter-spacing:.08em;color:#7fa3b5;text-transform:uppercase}
 #appbar button{all:unset;cursor:pointer;color:#060b12;background:#22d3ee;padding:5px 10px}</style>
-</head><body><title>Observatorio de Inversión MERPAZ</title>
+</head><body><!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Observatorio de Inversión MERPAZ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -170,9 +171,9 @@ footer a{color:var(--accent)}
 
 <script id="datos" type="application/json">
 {
- "corte": "2026-11-18",
- "generado": "2026-11-19 07:55 (hora Ecuador)",
- "contexto": "El miércoles 18 de noviembre Wall Street cerró mixto: el S&P 500 bajó 0,23% a 7.323,63 (quinta baja seguida, la racha más larga desde junio, y por debajo de su promedio de 200 días), el Dow cayó 1,11% (-561,25 puntos) a 50.198,17 arrastrado por UnitedHealth (-10,21%) y el Nasdaq subió 0,42% a 24.429,89 con el rebote de la ciberseguridad (Palo Alto +9,90%, CrowdStrike +7,95%) y de Amazon y AMD. Nvidia cayó 2,89% pese a superar lo esperado; salud (-2,20%) y energía (-3,27%) fueron los peores sectores, por la propuesta de auditorías a Medicare Advantage y la caída del petróleo (WTI -3,20% a 83,26, menor cierre desde el 26-ago, por un aumento de inventarios). Las minutas de la Fed mostraron que casi todos sus miembros ven apropiadas más alzas y Waller habló de una posible alza de 50 pb en diciembre (Kalshi: 91% para 25 pb y 8% para una mayor); el Tesoro a 10 años cerró en 5,07%, el VIX bajó a 24,56 y el oro se desplomó 3,50% a 3.728,8, su menor nivel desde septiembre de 2025. Próximo evento: hoy jueves 19 salen los pedidos de subsidio por desempleo y el índice de la Fed de Filadelfia (8:30, hora de Nueva York), los resultados de Walmart antes de la apertura y de Intuit tras el cierre, y el debut de Anthropic en el Nasdaq.",
+ "corte": "2026-11-19",
+ "generado": "2026-11-20 07:50 (hora Ecuador)",
+ "contexto": "El jueves 19 de noviembre Wall Street tuvo una venta generalizada: el S&P 500 cayó 2,02% a 7.175,83 (sexta baja seguida, la racha más larga desde 2024, con 464 acciones en baja y solo 37 al alza), el Nasdaq 2,25% a 23.879,20 y el Dow 2,19% (-1.101,11 puntos) a 49.097,06; los 11 sectores cerraron en rojo. Anthropic debutó en el Nasdaq a 83 USD, abrió en 111,50 y cerró en 97,17 (+17,07%), pero no logró reanimar el apetito por la IA: Nvidia cayó 3,30% tras borrar un alza inicial de 4,7% y AMD 7,72%. El VIX saltó 15,80% a 28,44 (máximo desde marzo), el oro cayó 3,04% a 3.628,3, Bitcoin ≈61.474 y el Tesoro a 10 años bajó a 5,04% como refugio; la Fed de Filadelfia se desplomó a 6,3 (esperado 18) y los subsidios por desempleo fueron 203.000; Walmart subió su guía pero bajó 1,04%. Próximo evento: hoy viernes 20 habla Waller (8:25, hora de Nueva York), sale la confianza del consumidor final de la Universidad de Míchigan (10:00) y habla Lisa Cook (12:15); Kalshi da 89,3% a un alza de 25 pb el 9 de diciembre (CME FedWatch 96,4%).",
  "series": {
   "sp500": {
    "n": "S&P 500",
@@ -199,7 +200,8 @@ footer a{color:var(--accent)}
     "11-13",
     "11-16",
     "11-17",
-    "11-18"
+    "11-18",
+    "11-19"
    ],
    "v": [
     7663.43,
@@ -221,11 +223,12 @@ footer a{color:var(--accent)}
     7561.67,
     7416.59,
     7340.53,
-    7323.63
+    7323.63,
+    7175.83
    ],
-   "dia": -0.23,
-   "ytd": 7.1,
-   "fuente": "Capp Notes / AP"
+   "dia": -2.02,
+   "ytd": 4.9,
+   "fuente": "Capp Notes"
   },
   "nasdaq": {
    "n": "Nasdaq Composite",
@@ -253,7 +256,8 @@ footer a{color:var(--accent)}
     "11-13",
     "11-16",
     "11-17",
-    "11-18"
+    "11-18",
+    "11-19"
    ],
    "v": [
     27599.89,
@@ -276,12 +280,13 @@ footer a{color:var(--accent)}
     25136.27,
     24509.76,
     24328.38,
-    24429.89
+    24429.89,
+    23879.2
    ],
-   "dia": 0.42,
-   "ytd": 5.1,
-   "nota": "Máximo histórico 27.599,89 el 6-oct; 18-nov: +0,42%, aún en corrección (≈11,5% bajo el máximo). Nvidia -2,89% pese a superar lo esperado; rebote de ciberseguridad (Palo Alto +9,90%, CrowdStrike +7,95%), AMD +5,31% y Amazon +3,82%",
-   "fuente": "Capp Notes / AP"
+   "dia": -2.25,
+   "ytd": 2.7,
+   "nota": "Máximo histórico 27.599,89 el 6-oct; 19-nov: -2,25%, ≈13,5% bajo el máximo, en corrección. Nvidia -3,30% (borró un alza inicial de 4,7%; Daiwa bajó su precio objetivo a 185), AMD -7,72%, Alphabet -3,46%, Amazon -3,87%; Anthropic debutó a 83 USD y cerró en 97,17 (+17,07%)",
+   "fuente": "Capp Notes"
   },
   "dow": {
    "n": "Dow Jones",
@@ -308,7 +313,8 @@ footer a{color:var(--accent)}
     "11-13",
     "11-16",
     "11-17",
-    "11-18"
+    "11-18",
+    "11-19"
    ],
    "v": [
     52867.98,
@@ -330,11 +336,12 @@ footer a{color:var(--accent)}
     52347.55,
     51608.17,
     50759.42,
-    50198.17
+    50198.17,
+    49097.06
    ],
-   "dia": -1.11,
-   "ytd": 4.4,
-   "fuente": "Capp Notes / AP"
+   "dia": -2.19,
+   "ytd": 2.1,
+   "fuente": "Capp Notes"
   },
   "ust10": {
    "n": "Bono Tesoro EE.UU. 10 años",
@@ -342,7 +349,6 @@ footer a{color:var(--accent)}
    "dec": 2,
    "grupo": "Renta fija EE.UU.",
    "fechas": [
-    "10-06",
     "10-07",
     "10-08",
     "10-09",
@@ -371,10 +377,10 @@ footer a{color:var(--accent)}
     "11-13",
     "11-16",
     "11-17",
-    "11-18"
+    "11-18",
+    "11-19"
    ],
    "v": [
-    5.27,
     5.28,
     5.23,
     5.24,
@@ -403,10 +409,11 @@ footer a{color:var(--accent)}
     5.15,
     5.12,
     5.1,
-    5.07
+    5.07,
+    5.04
    ],
    "tipo": "tasa",
-   "fuente": "Capp Notes (cierre 18-nov: 5,07%, -3 pb; 2 años 4,80%; 30 años 5,41%)"
+   "fuente": "Capp Notes / Tesoro (cierre 19-nov: 5,04%, -3 pb; 2 años 4,76%; 30 años 5,40%)"
   },
   "fed": {
    "n": "Tasa Fed (rango superior)",
@@ -422,7 +429,7 @@ footer a{color:var(--accent)}
     4.0
    ],
    "tipo": "tasa",
-   "nota": "Rango 3,75-4,00%: mantenido el 28-oct (votación 10-2). Minutas del 18-nov: casi todos los miembros ven apropiadas más alzas; Waller habló de una posible alza de 50 pb en diciembre. Kalshi 18-nov: 91% para 25 pb y 8% para una mayor (CME FedWatch 17-nov: ≈95,5% para 25 pb). Tasa efectiva 3,88% (17-nov). Reunión 8-9 de diciembre",
+   "nota": "Rango 3,75-4,00%: mantenido el 28-oct (votación 10-2). Minutas del 18-nov: casi todos los miembros ven apropiadas más alzas; Waller habló de una posible alza de 50 pb en diciembre. Kalshi 19-nov: 89,3% para 25 pb, 6,3% para 50 pb y 3,4% para mantener; CME FedWatch 19-nov: 96,4% para 25 pb. Reunión 8-9 de diciembre",
    "fuente": "Reserva Federal"
   },
   "hy": {
@@ -479,7 +486,7 @@ footer a{color:var(--accent)}
     3.43
    ],
    "tipo": "riesgo",
-   "nota": "Promedio desde 1996: 5,16%. Último dato FRED: 17-nov (3,43%, +9 pb en el día y +20 pb desde el 13-nov), el mayor nivel desde el 5-nov; sigue lejos del promedio histórico",
+   "nota": "Promedio desde 1996: 5,16%. Último dato FRED verificado: 17-nov (3,43%, +20 pb desde el 13-nov); sin dato nuevo verificado al 20-nov pese a la venta del 19-nov",
    "fuente": "FRED BAMLH0A0HYM2"
   },
   "vix": {
@@ -512,7 +519,8 @@ footer a{color:var(--accent)}
     "11-13",
     "11-16",
     "11-17",
-    "11-18"
+    "11-18",
+    "11-19"
    ],
    "v": [
     16.46,
@@ -539,10 +547,11 @@ footer a{color:var(--accent)}
     19.3,
     22.91,
     25.46,
-    24.56
+    24.56,
+    28.44
    ],
    "tipo": "riesgo",
-   "nota": "Cierre 18-nov: 24,56 (-3,53%), primera baja tras cuatro alzas seguidas; sigue en zona de tensión",
+   "nota": "Cierre 19-nov: 28,44 (+15,80%), máximo intradía 29,13, el más alto desde marzo: zona de tensión",
    "fuente": "Capp Notes"
   },
   "oro": {
@@ -551,7 +560,6 @@ footer a{color:var(--accent)}
    "dec": 1,
    "grupo": "Materias primas",
    "fechas": [
-    "10-08",
     "10-09",
     "10-12",
     "10-13",
@@ -580,10 +588,10 @@ footer a{color:var(--accent)}
     "11-13",
     "11-16",
     "11-17",
-    "11-18"
+    "11-18",
+    "11-19"
    ],
    "v": [
-    4157.0,
     4216.3,
     4190.6,
     4177.3,
@@ -612,11 +620,12 @@ footer a{color:var(--accent)}
     3886.3,
     3853.0,
     3851.9,
-    3728.8
+    3728.8,
+    3628.3
    ],
-   "dia": -3.5,
+   "dia": -3.04,
    "fuente": "Capp Notes",
-   "nota": "18-nov: 3.728,8 (-3,50%), su menor nivel desde septiembre de 2025, con el dólar en máximo de 19 meses y minutas de la Fed que anticipan más alzas"
+   "nota": "19-nov: 3.628,3 (-3,04%, cotización al final de la sesión), nuevo mínimo desde septiembre de 2025; plata -4,75%"
   },
   "wti": {
    "n": "Petróleo WTI",
@@ -644,7 +653,8 @@ footer a{color:var(--accent)}
     "11-13",
     "11-16",
     "11-17",
-    "11-18"
+    "11-18",
+    "11-19"
    ],
    "v": [
     89.43,
@@ -667,11 +677,12 @@ footer a{color:var(--accent)}
     88.56,
     85.72,
     86.01,
-    83.26
+    83.26,
+    83.21
    ],
-   "dia": -3.2,
+   "dia": -0.06,
    "fuente": "Capp Notes",
-   "nota": "Contrato diciembre; 18-nov: 83,26 (-3,20%), menor cierre desde el 26-ago tras un aumento de 3,38 millones de barriles en inventarios de EE.UU."
+   "nota": "Contrato diciembre; 19-nov: 83,21 (-0,06%), el más bajo desde el 26-ago"
   },
   "brent": {
    "n": "Petróleo Brent",
@@ -698,7 +709,8 @@ footer a{color:var(--accent)}
     "11-13",
     "11-16",
     "11-17",
-    "11-18"
+    "11-18",
+    "11-19"
    ],
    "v": [
     112.91,
@@ -720,11 +732,12 @@ footer a{color:var(--accent)}
     95.84,
     92.44,
     93.14,
-    91.95
+    91.95,
+    91.98
    ],
-   "dia": -1.28,
-   "nota": "Contrato enero; 18-nov: 91,95 (-1,28%)",
-   "fuente": "Capp Notes / AP"
+   "dia": 0.03,
+   "nota": "Contrato enero; 19-nov: 91,98 (+0,03%)",
+   "fuente": "Capp Notes"
   },
   "btc": {
    "n": "Bitcoin",
@@ -751,7 +764,8 @@ footer a{color:var(--accent)}
     "11-13",
     "11-16",
     "11-17",
-    "11-18"
+    "11-18",
+    "11-19"
    ],
    "v": [
     81300,
@@ -773,10 +787,11 @@ footer a{color:var(--accent)}
     68237,
     65232,
     64211,
-    62305
+    62305,
+    61474
    ],
    "fuente": "Capp Notes",
-   "nota": "18-nov: ≈62.305 (-3,99%), su menor nivel desde agosto"
+   "nota": "19-nov: ≈61.474 (-2,39%, cotización al final de la sesión), nuevo mínimo desde agosto"
   },
   "rp": {
    "n": "Riesgo país Ecuador (EMBI)",
@@ -818,7 +833,7 @@ footer a{color:var(--accent)}
     520.03
    ],
    "tipo": "riesgo",
-   "nota": "520 pb al 12-nov, último dato disponible (sin dato nuevo publicado al 19-nov); -71 pb desde el 6-nov tras el acuerdo técnico con el FMI del 9-nov: sexta revisión (USD 380 millones) y programa de resiliencia (USD 710 millones), aún pendientes del directorio. Máximo del año: 597 pb (26-oct); mínimo de 11 años en junio (396 pb)",
+   "nota": "520 pb al 12-nov, último dato disponible (sin dato nuevo publicado al 20-nov); -71 pb desde el 6-nov tras el acuerdo técnico con el FMI del 9-nov: sexta revisión (USD 380 millones) y programa de resiliencia (USD 710 millones), aún pendientes del directorio. Máximo del año: 597 pb (26-oct); mínimo de 11 años en junio (396 pb)",
    "fuente": "Diligence (12-nov) / JP Morgan"
   },
   "ec2030": {
@@ -838,7 +853,7 @@ footer a{color:var(--accent)}
     97.27,
     97.06
    ],
-   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 19-nov)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 20-nov)"
   },
   "ec2034": {
    "n": "Bono Ecuador 2034",
@@ -857,7 +872,7 @@ footer a{color:var(--accent)}
     91.0,
     90.15
    ],
-   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 19-nov)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 20-nov)"
   },
   "ec2035": {
    "n": "Bono Ecuador 2035",
@@ -876,7 +891,7 @@ footer a{color:var(--accent)}
     82.18,
     81.66
    ],
-   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 19-nov)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 20-nov)"
   },
   "ec2039": {
    "n": "Bono Ecuador 2039",
@@ -895,7 +910,7 @@ footer a{color:var(--accent)}
     88.8,
     88.2
    ],
-   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 19-nov)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 20-nov)"
   },
   "ec2040": {
    "n": "Bono Ecuador 2040",
@@ -914,7 +929,7 @@ footer a{color:var(--accent)}
     71.67,
     71.11
    ],
-   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 19-nov)"
+   "fuente": "BCE (último dato 26-oct; sin dato nuevo al 20-nov)"
   },
   "tpr": {
    "n": "Tasa pasiva referencial BCE",
@@ -930,7 +945,7 @@ footer a{color:var(--accent)}
     4.83
    ],
    "tipo": "tasa",
-   "nota": "Tasa pasiva referencial de noviembre: 4,83% (octubre 4,93%). Depósito a plazo 361+ días: 6,21% (tasas por plazo de octubre; las de noviembre no se pudieron verificar al 19-nov)",
+   "nota": "Tasa pasiva referencial de noviembre: 4,83% (octubre 4,93%). Depósito a plazo 361+ días: 6,21% (tasas por plazo de octubre; las de noviembre no se pudieron verificar al 20-nov)",
    "fuente": "BCE vía publicación CFN, tasas noviembre 2026"
   }
  },
@@ -992,8 +1007,8 @@ footer a{color:var(--accent)}
    "crec": 3.0,
    "racha": "70 años subiendo dividendo",
    "pe": "≈23 adelantado",
-   "dato": "Pago ≈62% de su utilidad",
-   "riesgo": "Costos de materias primas y transporte (≈8% de freno a la utilidad); el consumo básico bajó 0,31% el 18-nov. Día del Inversionista el 19-nov (14:00, hora de Nueva York): posible cambio de guía",
+   "dato": "Pago ≈62% de su utilidad; en su Día del Inversionista (19-nov) se fijó una meta de hasta USD 10 mil millones en ahorros de productividad y un recorte de hasta 30% de su personal de abastecimiento hacia 2030",
+   "riesgo": "Costos de materias primas y transporte; el consumo básico bajó 1,45% el 19-nov en la venta generalizada (precio de la tabla: 18-nov)",
    "s": {
     "sol": 95,
     "div": 98,
@@ -1014,7 +1029,7 @@ footer a{color:var(--accent)}
    "racha": "64 años subiendo dividendo",
    "pe": "≈29 histórico",
    "dato": "Una de las pocas empresas con calificación AAA; Reino Unido aprobó su píldora oral para psoriasis",
-   "riesgo": "Ventas de Stelara cayeron 55,7% por genéricos; cayó 2,15% el 18-nov con la salud como peor sector (-2,20%) por la propuesta de ampliar auditorías a Medicare Advantage, que golpea sobre todo a aseguradoras (UnitedHealth -10,21%), no a J&J",
+   "riesgo": "Ventas de Stelara cayeron 55,7% por genéricos; la salud fue de los peores sectores el 18-nov (-2,20%) y el 19-nov (-2,05%); J&J caía 2,66% a media sesión del 19-nov (precio de la tabla: 18-nov)",
    "s": {
     "sol": 95,
     "div": 95,
@@ -1035,7 +1050,7 @@ footer a{color:var(--accent)}
    "racha": "Más de 60 años subiendo dividendo",
    "pe": "≈26 histórico",
    "dato": "Tercer trimestre superó estimaciones y elevó su guía 2026; dividendo de 0,16 USD en 1999 a 0,53 USD hoy",
-   "riesgo": "Litigio tributario con el IRS; el consumo básico bajó 0,31% el 18-nov. Fecha ex dividendo el 1-dic (precio de la tabla: 13-nov)",
+   "riesgo": "Litigio tributario con el IRS; el consumo básico bajó 1,45% el 19-nov. Fecha ex dividendo el 1-dic (precio de la tabla: 13-nov)",
    "s": {
     "sol": 90,
     "div": 90,
@@ -1140,7 +1155,7 @@ footer a{color:var(--accent)}
    "racha": "Más de 40 años subiendo dividendo",
    "pe": "—",
    "dato": "Utilidad ajustada del tercer trimestre de 4,23 USD por acción (sobre lo esperado), subió el dividendo trimestral a 1,07 USD (desde 1,03), amplió la recompra y compró 50% de Mozambique LNG",
-   "riesgo": "Muy ligada al precio del petróleo: el 18-nov el WTI cayó 3,20% a 83,26 y la energía fue el peor sector (-3,27%); Exxon bajó entre 3% y 4% ese día (precio de la tabla: 17-nov, antes de la caída)",
+   "riesgo": "Muy ligada al precio del petróleo: WTI en 83,21, el más bajo desde el 26-ago; la energía fue el sector menos malo el 19-nov (-0,65%) (precio de la tabla: 17-nov)",
    "s": {
     "sol": 85,
     "div": 85,
@@ -1161,7 +1176,7 @@ footer a{color:var(--accent)}
    "racha": "Dividendo en efectivo creciente (USD 62 a 70 millones)",
    "pe": "—",
    "dato": "Utilidad 2025 de USD 163,9 millones; recompra de acciones de hasta USD 20 millones; se compra en la Bolsa de Quito o Guayaquil",
-   "riesgo": "Riesgo país de 520 pb (12-nov, último dato), en baja tras el acuerdo con el FMI, y poca liquidez: vender rápido puede costar (precio de la tabla: boletín Mercapital al 14-ago)",
+   "riesgo": "Riesgo país de 520 pb (12-nov, último dato al 20-nov), en baja tras el acuerdo con el FMI, y poca liquidez: vender rápido puede costar (precio de la tabla: boletín Mercapital al 14-ago)",
    "s": {
     "sol": 80,
     "div": 80,
@@ -1181,8 +1196,8 @@ footer a{color:var(--accent)}
    "crec": null,
    "racha": "No paga dividendo",
    "pe": "Muy alto (más de 100 veces utilidad adelantada en febrero)",
-   "dato": "Cerca del doble en 2026; ingresos +26%; subió 7,95% el 18-nov con el rebote de la ciberseguridad (alerta de CISA por una falla \"Java4Shell\" y resultados de Palo Alto); Rosenblatt elevó su precio objetivo a 275",
-   "riesgo": "Precio ya descuenta mucho crecimiento: el software es muy volátil (Salesforce -9,45% el 17-nov y rebote fuerte el 18-nov); reporta su tercer trimestre fiscal pronto y el Nasdaq sigue en corrección",
+   "dato": "Cerca del doble en 2026; ingresos +26%; subió 7,95% el 18-nov y otro 2,71% el 19-nov, de las pocas alzas en un día de venta generalizada; Rosenblatt elevó su precio objetivo a 275",
+   "riesgo": "Precio ya descuenta mucho crecimiento: el software es muy volátil; reporta su tercer trimestre fiscal pronto, el Nasdaq cayó 2,25% el 19-nov y el VIX subió a 28,44 (precio de la tabla: 18-nov)",
    "s": {
     "sol": 55,
     "div": 0,
@@ -1203,7 +1218,7 @@ footer a{color:var(--accent)}
    "racha": "No paga dividendo",
    "pe": "—",
    "dato": "Subió 5,87% el 18-nov con el rebote de la ciberseguridad, pero acumula -22,9% desde el 20-oct; cayó 20,1% el 29-oct por un margen bruto bajo lo esperado y recortó su previsión de ingresos por servicios 2026 a USD 5.160 millones",
-   "riesgo": "Margen bruto presionado por el costo de componentes y alta volatilidad; con el VIX en 24,56 sigue frágil",
+   "riesgo": "Margen bruto presionado por el costo de componentes y alta volatilidad; con el VIX en 28,44 sigue frágil (precio de la tabla: 18-nov)",
    "s": {
     "sol": 65,
     "div": 0,
@@ -1505,13 +1520,13 @@ $('#charts').innerHTML=['ust10','oro','rp','vix','hy'].map(lineChart).join('');
 const INS = {
   dep:  {n:'Depósito a plazo Ecuador (181 a 361+ días)', r:'Conservador', y:5.6, beta:0, why:'BCE oct-26: 4,96% a 181-360 días y 6,21% a 361+; la tasa pasiva referencial bajó a 4,83% en noviembre (4,93% en octubre). Elegir banco con buena calificación.', ytxt:'4,96% – 6,21%'},
   tb:   {n:'Letras del Tesoro EE.UU. (T-bills, 3 a 12 meses)', r:'Conservador', y:D.tbills['13s'], beta:0, why:'Liquidez y riesgo soberano de EE.UU. La letra a 52 semanas rinde '+fmt(D.tbills['52s'])+'%, más que el dividendo de cualquier empresa sólida.', ytxt:fmt(D.tbills['13s'])+'% – '+fmt(D.tbills['52s'])+'%'},
-  ust:  {n:'Bono del Tesoro EE.UU. 10 años', r:'Conservador', y:last('ust10'), beta:-0.15, why:'5,07% al cierre del 18-nov (-3 pb), tercera jornada de compras de refugio. Las minutas de la Fed anticipan más alzas y Waller habló de 50 pb en diciembre: si la Fed sube más de lo previsto el rendimiento puede volver sobre 5,30% (condición de salida). Rendimiento atractivo: entrar escalonado.', ytxt:fmt(last('ust10'))+'%'},
+  ust:  {n:'Bono del Tesoro EE.UU. 10 años', r:'Conservador', y:last('ust10'), beta:-0.15, why:'5,04% al cierre del 19-nov (-3 pb), cuarta jornada de compras de refugio mientras la bolsa caía 2%. La Fed de Filadelfia se desplomó a 6,3 (esperado 18), pero el mercado sigue dando ≈90-96% a un alza de 25 pb en diciembre: si la Fed sube más de lo previsto el rendimiento puede volver sobre 5,30% (condición de salida). Rendimiento atractivo: entrar escalonado.', ytxt:fmt(last('ust10'))+'%'},
   def:  {n:'Acciones defensivas / S&P 500 igual ponderado', r:'Moderado', y:null, beta:0.7, why:'Consumo básico, salud y defensa resisten mejor la venta tecnológica; menos exposición a megacaps de IA.', ytxt:'variable'},
-  spx:  {n:'Índice S&P 500 (ETF amplio)', r:'Agresivo', y:null, beta:1.0, why:'CAPE 38,6 (18-nov), muy cerca de los máximos de 1999-2000; el S&P 500 encadena cinco bajas y perdió su promedio de 200 días: entrar escalonado.', ytxt:'variable'},
-  oro:  {n:'Oro', r:'Moderado', y:null, beta:0.1, why:'Se desplomó 3,50% a 3.728,8 el 18-nov, su menor nivel desde septiembre de 2025, con el dólar en máximo de 19 meses y minutas de la Fed que anticipan más alzas. Sigue bajo la condición de salida de 3.950: no acumular hasta que recupere ese nivel.', ytxt:fmt(last('oro'),0)+' USD/oz'},
-  ec30: {n:'Bono soberano Ecuador 2030', r:'Moderado', y:null, beta:0.5, why:'Cotiza a 97,06 (26-oct, último dato BCE, cerca de la par); vencimiento corto con riesgo país en baja a 520 pb (12-nov, último dato) tras el acuerdo técnico con el FMI. La caída del petróleo el 18-nov (WTI 83,26, menor cierre desde agosto) resta ingreso fiscal: vigilar.', ytxt:'precio 97,06'},
-  ec35: {n:'Bono soberano Ecuador 2035', r:'Agresivo', y:null, beta:0.6, why:'Cotiza a 81,66 (26-oct, último dato BCE): descuento amplio. El riesgo país bajó a 520 pb tras el acuerdo con el FMI; gana si vuelve hacia 415 pb (nivel de 1-sep). El petróleo en baja (WTI 83,26 el 18-nov) y la tensión global (VIX 24,56) son los riesgos a vigilar.', ytxt:'precio 81,66'},
-  ene:  {n:'Sector energía', r:'Agresivo', y:null, beta:0.8, why:'El WTI cayó 3,20% a 83,26 (menor cierre desde el 26-ago) y el Brent 1,28% a 91,95 el 18-nov tras un aumento de inventarios en EE.UU.; la energía fue el peor sector (-3,27%) y Exxon bajó entre 3% y 4%. No aumentar todavía.', ytxt:'variable'}
+  spx:  {n:'Índice S&P 500 (ETF amplio)', r:'Agresivo', y:null, beta:1.0, why:'CAPE 38,6 (última estimación), muy cerca de los máximos de 1999-2000; el S&P 500 cayó 2,02% el 19-nov, su sexta baja seguida, bajo su promedio de 200 días: entrar escalonado y solo en montos pequeños.', ytxt:'variable'},
+  oro:  {n:'Oro', r:'Moderado', y:null, beta:0.1, why:'Cayó otro 3,04% a 3.628,3 el 19-nov (tras -3,50% el 18-nov), nuevo mínimo desde septiembre de 2025, con el dólar fuerte y la Fed inclinada a subir tasas. No funcionó como refugio en la venta del jueves. Sigue bajo la condición de salida de 3.950: no acumular hasta que recupere ese nivel.', ytxt:fmt(last('oro'),0)+' USD/oz'},
+  ec30: {n:'Bono soberano Ecuador 2030', r:'Moderado', y:null, beta:0.5, why:'Cotiza a 97,06 (26-oct, último dato BCE, cerca de la par); vencimiento corto con riesgo país en baja a 520 pb (12-nov, último dato) tras el acuerdo técnico con el FMI. El petróleo en su menor nivel desde agosto (WTI 83,21 el 19-nov) resta ingreso fiscal: vigilar.', ytxt:'precio 97,06'},
+  ec35: {n:'Bono soberano Ecuador 2035', r:'Agresivo', y:null, beta:0.6, why:'Cotiza a 81,66 (26-oct, último dato BCE): descuento amplio. El riesgo país bajó a 520 pb tras el acuerdo con el FMI; gana si vuelve hacia 415 pb (nivel de 1-sep). El petróleo en baja (WTI 83,21 el 19-nov) y la tensión global (VIX 28,44, máximo desde marzo) son los riesgos a vigilar.', ytxt:'precio 81,66'},
+  ene:  {n:'Sector energía', r:'Agresivo', y:null, beta:0.8, why:'El WTI se estabilizó en 83,21 (-0,06%) y el Brent en 91,98 (+0,03%) el 19-nov, cerca de su menor nivel desde agosto; la energía fue el sector menos malo de la venta del jueves (-0,65%) tras caer 3,27% el 18-nov. No aumentar todavía.', ytxt:'variable'}
 };
 /* Empresas -> parte de acciones sólidas de cada perfil */
 (()=>{const top=(D.empresas||[]).filter(e=>e.pais!=='Ecuador').map(e=>({e,x:isrQ(e)})).filter(o=>o.x>=70).sort((a,b)=>b.x-a.x).slice(0,3);
@@ -1587,12 +1602,12 @@ renderCalc();
 const VARS=[['gap','Diferencia valor estimado vs precio',30],['det','Deterioro o riesgo no reconocido',25],['evi','Evidencia verificable',20],['cat','Catalizadores',15],['liq','Liquidez y ejecución',10]];
 const W={}; VARS.forEach(v=>W[v[0]]=v[2]);
 const OPP=[
-  {n:'Megacaps de IA / Nasdaq',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Burbuja',h:'Precio descuenta retornos de la inversión en IA que el flujo de caja aún no muestra. El 18-nov Nvidia cayó 2,89% pese a superar lo esperado (ingresos de USD 115.840 millones y guía de USD 130.000 millones): ni un buen resultado sostiene el precio. El Nasdaq subió 0,42% por el rebote de la ciberseguridad, pero sigue ≈11,5% bajo su máximo, en corrección, y el CAPE del mercado está en 38,6.',s:{gap:86,det:90,evi:90,cat:88,liq:95},x:'Invalidar si el Nasdaq recupera su máximo de 27.600 o si el flujo libre de las megacaps vuelve a crecer dos trimestres seguidos.'},
-  {n:'Bono del Tesoro EE.UU. 10 años',dir:'comprar',pf:['conservador','moderado','agresivo'],m:'Oportunidad defensiva',h:'Rinde 5,07% al cierre del 18-nov (-3 pb), en una tercera jornada de compras de refugio con la bolsa en baja. Las minutas de la Fed mostraron que casi todos sus miembros ven apropiadas más alzas y Waller habló de 50 pb en diciembre (Kalshi: 91% para 25 pb). El rendimiento es alto, pero queda a 23 pb de la condición de salida: comprar escalonado y en montos pequeños.',s:{gap:70,det:55,evi:78,cat:70,liq:100},x:'Salir o reducir si el rendimiento cierra sobre 5,30% (la Fed sube más de lo previsto).'},
-  {n:'Crédito high yield (bonos basura)',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Riesgo ignorado',h:'Spread de 3,43% (17-nov, último dato FRED), +20 pb en dos sesiones pero aún muy lejos del promedio histórico de 5,16% con tasas a 10 años sobre 5%: el mercado cobra muy poco por el riesgo de impago. El 18-nov las financieras volvieron a caer (-1,14%) y el S&P 500 sumó su quinta baja: el apetito por riesgo se debilita.',s:{gap:85,det:76,evi:70,cat:74,liq:70},x:'Señal pierde fuerza si la Fed recorta tasas o si el spread ya supera 4,5%.'},
-  {n:'Bono soberano Ecuador 2035',dir:'comprar',pf:['agresivo'],m:'Oportunidad castigada',h:'Precio 81,66 (26-oct, último dato BCE; sin dato nuevo al 19-nov). El riesgo país bajó a 520 pb el 12-nov (último dato), 71 pb menos que el 6-nov, tras el acuerdo técnico con el FMI (USD 380 millones más un programa de USD 710 millones, pendientes del directorio): es el catalizador que faltaba. Pero el petróleo cayó el 18-nov (WTI 83,26, menor cierre desde agosto), lo que resta ingreso fiscal. Si el riesgo vuelve hacia 450 pb el bono se revaloriza.',s:{gap:76,det:60,evi:55,cat:55,liq:45},x:'Cortar pérdida si el riesgo país supera 700 pb o se retrasa una revisión del FMI.'},
-  {n:'Oro tras la corrección',dir:'comprar',pf:['moderado','agresivo'],m:'Oportunidad táctica',h:'Se desplomó 3,50% a 3.728,8 el 18-nov, su menor nivel desde septiembre de 2025, con el dólar en máximo de 19 meses y unas minutas de la Fed que anticipan más alzas; sigue muy por debajo de la condición de salida de 3.950: la señal de compra sigue suspendida y no funcionó como refugio.',s:{gap:45,det:30,evi:50,cat:30,liq:90},x:'Condición de salida activada (cierre bajo 3.950 USD/oz): reducir; reconsiderar solo si recupera 4.000 USD/oz.'},
-  {n:'Bitcoin',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Activo especulativo',h:'Cayó 3,99% a ≈62.305 el 18-nov, su menor nivel desde agosto; sin flujo de caja que ancle el valor y presionado por tasas más altas y la menor demanda por riesgo.',s:{gap:42,det:52,evi:38,cat:45,liq:85},x:'No aplica en perfiles conservador y moderado.'}
+  {n:'Megacaps de IA / Nasdaq',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Burbuja',h:'Precio descuenta retornos de la inversión en IA que el flujo de caja aún no muestra. El 19-nov ni el debut de Anthropic (+17,07% sobre su precio de salida) reanimó al sector: Nvidia cayó 3,30% tras borrar un alza de 4,7% y AMD 7,72%. El Nasdaq cayó 2,25% a 23.879, ≈13,5% bajo su máximo, y el CAPE del mercado está en 38,6.',s:{gap:86,det:90,evi:90,cat:88,liq:95},x:'Invalidar si el Nasdaq recupera su máximo de 27.600 o si el flujo libre de las megacaps vuelve a crecer dos trimestres seguidos.'},
+  {n:'Bono del Tesoro EE.UU. 10 años',dir:'comprar',pf:['conservador','moderado','agresivo'],m:'Oportunidad defensiva',h:'Rinde 5,04% al cierre del 19-nov (-3 pb), cuarta jornada de compras de refugio mientras el S&P 500 caía 2,02%. La Fed de Filadelfia se desplomó a 6,3 (esperado 18), pero Kalshi aún da 89,3% a un alza de 25 pb en diciembre. El rendimiento es alto y queda a 26 pb de la condición de salida: comprar escalonado y en montos pequeños.',s:{gap:70,det:55,evi:78,cat:70,liq:100},x:'Salir o reducir si el rendimiento cierra sobre 5,30% (la Fed sube más de lo previsto).'},
+  {n:'Crédito high yield (bonos basura)',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Riesgo ignorado',h:'Spread de 3,43% (17-nov, último dato FRED verificado), aún muy lejos del promedio histórico de 5,16% con tasas a 10 años sobre 5%: el mercado cobra muy poco por el riesgo de impago. El 19-nov el S&P 500 cayó 2,02% (sexta baja), el Russell 2000 2,18% y el VIX saltó a 28,44: el apetito por riesgo se debilita y el spread tiende a abrirse.',s:{gap:85,det:76,evi:70,cat:74,liq:70},x:'Señal pierde fuerza si la Fed recorta tasas o si el spread ya supera 4,5%.'},
+  {n:'Bono soberano Ecuador 2035',dir:'comprar',pf:['agresivo'],m:'Oportunidad castigada',h:'Precio 81,66 (26-oct, último dato BCE; sin dato nuevo al 20-nov). El riesgo país bajó a 520 pb el 12-nov (último dato), 71 pb menos que el 6-nov, tras el acuerdo técnico con el FMI (USD 380 millones más un programa de USD 710 millones, pendientes del directorio): es el catalizador que faltaba. Pero el petróleo sigue en su menor nivel desde agosto (WTI 83,21 el 19-nov) y la aversión global al riesgo subió (VIX 28,44), lo que puede frenar la mejora. Si el riesgo vuelve hacia 450 pb el bono se revaloriza.',s:{gap:76,det:60,evi:55,cat:55,liq:45},x:'Cortar pérdida si el riesgo país supera 700 pb o se retrasa una revisión del FMI.'},
+  {n:'Oro tras la corrección',dir:'comprar',pf:['moderado','agresivo'],m:'Oportunidad táctica',h:'Cayó otro 3,04% a 3.628,3 el 19-nov tras desplomarse 3,50% el 18-nov: nuevo mínimo desde septiembre de 2025, con el dólar fuerte y la Fed inclinada a subir. Tampoco funcionó como refugio en la venta del jueves; sigue muy por debajo de la condición de salida de 3.950: la señal de compra sigue suspendida.',s:{gap:45,det:28,evi:50,cat:25,liq:90},x:'Condición de salida activada (cierre bajo 3.950 USD/oz): reducir; reconsiderar solo si recupera 4.000 USD/oz.'},
+  {n:'Bitcoin',dir:'evitar',pf:['conservador','moderado','agresivo'],m:'A · Activo especulativo',h:'Cayó 2,39% a ≈61.474 el 19-nov, nuevo mínimo desde agosto; sin flujo de caja que ancle el valor y presionado por tasas más altas y la menor demanda por riesgo.',s:{gap:42,det:52,evi:38,cat:45,liq:85},x:'No aplica en perfiles conservador y moderado.'}
 ];
 /* Empresas -> SDIRM: sólidas (ISR>=70) como compra, especulativas (ISR<55) como evitar */
 (()=>{const E=(D.empresas||[]).map(e=>({e,x:isrQ(e)}));
@@ -1656,12 +1671,12 @@ renderPerf();
 
 const V=D.valuacion;
 const AL=[
-  ['cr',fmt(V.margin_tn)+' bn','Deuda en margen cerca del récord','Los inversionistas de EE.UU. deben USD 1,45 billones prestados para comprar acciones en octubre (FINRA), primera baja tras 1,48 en septiembre y el récord de 1,50 en junio. El S&P 500 encadena cinco bajas (-0,23% el 18-nov, bajo su promedio de 200 días) y el Dow perdió otros 561 puntos: con el Tesoro a 10 años sobre 5%, el apalancamiento en máximos es caro de sostener y la primera baja del margen sugiere que algunos ya están reduciendo.'],
-  ['cr',fmt(V.cape,1)+'x','Valuación en percentil '+fmt(V.cape_pct,1),'CAPE de 38,6 al 18-nov (40,6 el 1-oct): solo fue más alto en 1999-2000 y a fines de 2025. El percentil es la última estimación disponible. La prima de las acciones sobre los bonos es apenas '+fmt(V.ecy)+' puntos, cerca de su mínimo.'],
-  [last('vix')>=20?'cr':last('vix')>=17?'wa':'ok',fmt(last('vix')),'VIX','24,56 el 18-nov (-3,53%), primera baja tras cuatro alzas seguidas, pero sigue en zona de tensión. Hoy jueves 19 los resultados de Walmart, el debut de Anthropic en el Nasdaq y los datos de empleo pueden mover la volatilidad.'],
-  ['wa',fmt(last('hy'))+'%','Spread high yield','3,43% el 17-nov (último dato FRED), +20 pb en dos sesiones y 29 pb sobre el mínimo de la serie (3,14% el 28-oct). Si el crédito se abre de golpe los fondos apalancados venden a la vez. Vigilar cruce de 3,77% (máximo de 52 semanas).'],
-  ['cr',fmt(last('rp'),0)+' pb','Riesgo país Ecuador','520 pb el 12-nov (último dato; sin dato nuevo al 19-nov), -71 pb desde el 6-nov tras el acuerdo técnico con el FMI (USD 380 millones de la sexta revisión y USD 710 millones de un programa de resiliencia, pendientes del directorio), pero aún 105 pb sobre el 1-sep. La caída del petróleo (WTI 83,26 el 18-nov) puede frenar la mejora. Sigue encareciendo el financiamiento externo del Estado y de empresas locales.'],
-  ['cr','≈91%','Alza de la Fed en diciembre','Las minutas de la reunión de octubre (18-nov) mostraron que casi todos los miembros ven apropiadas más alzas, y el gobernador Waller dijo que la Fed podría tener que "sorprender" con 50 pb en diciembre. Kalshi da 91% a un alza de 25 pb el 8-9 de diciembre y 8% a una mayor (CME FedWatch 17-nov: ≈95,5% para 25 pb). El dólar tocó su máximo de 19 meses.']
+  ['cr',fmt(V.margin_tn)+' bn','Deuda en margen cerca del récord','Los inversionistas de EE.UU. deben USD 1,45 billones prestados para comprar acciones en octubre (FINRA), primera baja tras 1,48 en septiembre y el récord de 1,50 en junio. El S&P 500 encadena seis bajas (-2,02% el 19-nov, bajo su promedio de 200 días) y el Dow perdió 1.101 puntos: con el Tesoro a 10 años sobre 5%, el apalancamiento en máximos es caro de sostener y la primera baja del margen sugiere que algunos ya están reduciendo.'],
+  ['cr',fmt(V.cape,1)+'x','Valuación en percentil '+fmt(V.cape_pct,1),'CAPE de 38,6 (última estimación; 40,6 el 1-oct): solo fue más alto en 1999-2000 y a fines de 2025. El percentil es la última estimación disponible. La prima de las acciones sobre los bonos es apenas '+fmt(V.ecy)+' puntos, cerca de su mínimo.'],
+  [last('vix')>=20?'cr':last('vix')>=17?'wa':'ok',fmt(last('vix')),'VIX','28,44 el 19-nov (+15,80%), con máximo intradía de 29,13, el nivel más alto desde marzo. Hoy viernes 20 los discursos de Waller y Cook y la confianza del consumidor de Míchigan pueden mover la volatilidad.'],
+  ['wa',fmt(last('hy'))+'%','Spread high yield','3,43% el 17-nov (último dato FRED verificado), +20 pb en dos sesiones y 29 pb sobre el mínimo de la serie (3,14% el 28-oct); la venta del 19-nov hace probable una nueva apertura. Si el crédito se abre de golpe los fondos apalancados venden a la vez. Vigilar cruce de 3,77% (máximo de 52 semanas).'],
+  ['cr',fmt(last('rp'),0)+' pb','Riesgo país Ecuador','520 pb el 12-nov (último dato; sin dato nuevo al 20-nov), -71 pb desde el 6-nov tras el acuerdo técnico con el FMI (USD 380 millones de la sexta revisión y USD 710 millones de un programa de resiliencia, pendientes del directorio), pero aún 105 pb sobre el 1-sep. El petróleo en su menor nivel desde agosto (WTI 83,21 el 19-nov) y la venta global pueden frenar la mejora. Sigue encareciendo el financiamiento externo del Estado y de empresas locales.'],
+  ['cr','≈89%','Alza de la Fed en diciembre','Las minutas de octubre (18-nov) mostraron que casi todos los miembros ven apropiadas más alzas, y Waller habló de un posible alza de 50 pb. Aun con la Fed de Filadelfia desplomada a 6,3 el 19-nov, Kalshi da 89,3% a un alza de 25 pb el 9 de diciembre y 6,3% a una de 50 pb (CME FedWatch: 96,4% para 25 pb). Hoy viernes hablan Waller y Cook.']
 ];
 $('#alerts').innerHTML=AL.map(a=>`<div class="alert"><span class="num">${a[1]}</span><div><strong>${a[2]}</strong><p class="note" style="margin-top:2px">${a[3]}</p></div><span class="pill ${a[0]}">${a[0]==='cr'?'Crítico':a[0]==='wa'?'Atención':'Normal'}</span></div>`).join('');
 
@@ -1757,13 +1772,14 @@ function show(v){ if(!views.includes(v)) v='variaciones';
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.v)));
 show((location.hash||'').slice(1));
 </script>
-<div id="appbar" hidden><span id="appmsg"></span><button id="appupd" hidden>Actualizar</button></div>
+
+</body></html><div id="appbar" hidden><span id="appmsg"></span><button id="appupd" hidden>Actualizar</button></div>
 <script>
 (function(){var bar=document.getElementById('appbar'),msg=document.getElementById('appmsg'),up=document.getElementById('appupd');
 function show(t,b){msg.textContent=t;bar.hidden=false;up.hidden=!b;}
 if(!('serviceWorker' in navigator)){return;}
 navigator.serviceWorker.register('sw.js').then(function(reg){
-  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261119-0755');setTimeout(function(){bar.hidden=true},5000);});
+  navigator.serviceWorker.ready.then(function(){show('Lista para usar sin conexión · versión 20261120-0750');setTimeout(function(){bar.hidden=true},5000);});
   reg.addEventListener('updatefound',function(){var w=reg.installing;w&&w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller){show('Nueva versión disponible',true);up.onclick=function(){w.postMessage('skip');};}});});
   reg.update();
 }).catch(function(){});
